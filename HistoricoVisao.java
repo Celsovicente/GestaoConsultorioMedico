@@ -2,7 +2,7 @@
 Tema: Gestão de Consultorio Medico
 Nome: Celso Segunda Vicente
 Numero: 33019
-Ficheiro: PagamentoVisao.java
+Ficheiro: HistoricoVisao.java
 Data: 31/05/2025
 --------------------------------------*/
 import javax.swing.*;
@@ -13,14 +13,14 @@ import Calendario.*;
 import javax.swing.UIManager.*;
 import java.io.*;
 
-public class PagamentoVisao extends JFrame
+public class HistoricoVisao extends JFrame
 {
     private PainelCentro centro;
     private PainelSul sul;
 
-    public PagamentoVisao()
+    public HistoricoVisao()
     {
-        super("Cadastro dos Pagamentos");
+        super("Cadastro do Historico do Paciente");
 
         definirTema();
         
@@ -89,6 +89,6 @@ public class PagamentoVisao extends JFrame
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new PagamentoVisao();
+        new HistoricoVisao();
     }
 }
