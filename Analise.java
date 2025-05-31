@@ -18,7 +18,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
 - PacienteVisao
 - ConsultaVisao
 - PagamentoVisao
-- HistoricoMedicoVisao
+- HistoricoPacienteVisao
 
 3. Entidades Fortes e Seus Atributos (Modelo)
 - PacienteModelo
@@ -30,7 +30,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     String email
     String numeroDocumento
     String nacionalidade
-    String provincia  
+    String provincia    
     String muncicipio
     String comuna
     
@@ -51,7 +51,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     String dataPagamento
     String metodoPagamento
 
-- HistoricoModelo
+- HistoricoPacienteModelo
     int id
     PacienteModelo paciente [Fk]
     String diagnostico
@@ -66,13 +66,13 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
 - HistoricoFile.dat
 
 5. Tabelas de Apoio (Auxiliares) = Entidades Fracas
-- Nacionalidade.tab
+- Nacionalidades.tab
 - Provincias.tab
 - Municipios.tab
 - Comunas.tab
 - Especialidades.tab
 - Medicos.tab
-- MetodosPagamento.tab
+- MetodoPagamento.tab
 - HorariosDisponiveis.tab
 
 6. Diversos
