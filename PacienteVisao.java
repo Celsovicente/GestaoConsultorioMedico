@@ -34,7 +34,56 @@ public class PacienteVisao extends JFrame
 
     class PainelCentro extends JPanel
     {
+        private JTextField idJTF, nomeJTF, dataNascimentoJTF, telefoneJTF, emailJTF, numeroDocumentoJTF;
+        private JComboBox generoJCB, nacionalidadeJCB, provinciaJCB, municipioJCB, comunaJCB; 
+        public PainelCentro()
+        {
+            setLayout(new GridLayout(12, 2));
 
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+
+            // 2º linha
+            add(new JLabel("Nome"));
+            add(nomeJTF = new JTextField());
+
+            // 3º linha
+            add(new JLabel("Data de Nascimento"));
+            add(dataNascimentoJTF = new JTextField());
+
+            // 4º linha
+            add(new JLabel("Numero de Documento"));
+            add(numeroDocumentoJTF = new JTextField());
+
+            // 5º linha
+            add(new JLabel("Genero"));
+            add(generoJCB = new JComboBox());
+
+            // 6º linha
+            add(new JLabel("Nacionalidade"));
+            add(nacionalidadeJCB = new JComboBox());
+
+            // 7º linha
+            add(new JLabel("Provincia"));
+            add(provinciaJCB = new JComboBox());
+
+            // 8º linha
+            add(new JLabel("Municipio"));
+            add(municipioJCB = new JComboBox());
+
+            // 9º linha
+            add(new JLabel("Comuna"));
+            add(comunaJCB = new JComboBox());
+
+            // 10º linha
+            add(new JLabel("Telefone"));
+            add(telefoneJTF = new JTextField());
+
+            // 11º linha
+            add(new JLabel("Email"));
+            add(emailJTF = new JTextField());
+        }
     }
 
     class PainelSul extends JPanel implements ActionListener
