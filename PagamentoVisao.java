@@ -27,14 +27,39 @@ public class PagamentoVisao extends JFrame
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
-        setSize(400, 400);
+        setSize(400, 250);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
     class PainelCentro extends JPanel
     {
+        private JTextField idJTF, descricaoJTF, valorJTF, dataPagamentoJTF;
+        private JComboBox metodoPagamentoJCB; 
+        public PainelCentro()
+        {
+            setLayout(new GridLayout(5, 2));
 
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+
+            // 2º linha
+            add(new JLabel("Descricao"));
+            add(descricaoJTF = new JTextField());
+
+            // 3º linha
+            add(new JLabel("Valor"));
+            add(valorJTF = new JTextField());
+
+            // 4º linha
+            add(new JLabel("Data de Pagamento"));
+            add(dataPagamentoJTF = new JTextField());
+
+            // 5º linha
+            add(new JLabel("Metodo de Pagamento"));
+            add(metodoPagamentoJCB = new JComboBox());
+        }
     }
 
     class PainelSul extends JPanel implements ActionListener
