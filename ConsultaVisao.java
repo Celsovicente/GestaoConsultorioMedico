@@ -27,14 +27,43 @@ public class ConsultaVisao extends JFrame
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
-        setSize(400, 400);
+        setSize(400, 280);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
     class PainelCentro extends JPanel
     {
+        private JTextField idJTF, dataConsultaJTF, observacoesJTF;
+        public JComboBox medicoJCB, especialidadeJCB, horaConsultaJCB;
+        public PainelCentro()
+        {
+            setLayout(new GridLayout(6, 2));
+            
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
 
+            // 2º linha
+            add(new JLabel("Especialidade"));
+            add(especialidadeJCB = new JComboBox());
+
+            // 3º linha
+            add(new JLabel("Medico"));
+            add(medicoJCB = new JComboBox());
+
+            // 4º linha
+            add(new JLabel("Data da Consulta"));
+            add(dataConsultaJTF = new JTextField());
+
+            // 5º linha
+            add(new JLabel("Hora da Consulta"));
+            add(horaConsultaJCB = new JComboBox());
+
+            // 6º linha
+            add(new JLabel("Observacoes"));
+            add(observacoesJTF = new JTextField());
+        }
     }
 
     class PainelSul extends JPanel implements ActionListener
@@ -84,7 +113,6 @@ public class ConsultaVisao extends JFrame
         {
         }
     }
-
 
     public static void main(String[] args)
     {

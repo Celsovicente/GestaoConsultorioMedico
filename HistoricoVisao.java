@@ -27,14 +27,38 @@ public class HistoricoVisao extends JFrame
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
-        setSize(400, 400);
+        setSize(400, 250);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
     class PainelCentro extends JPanel
     {
+        private JTextField idJTF, diagnosticoJTF, tratamentoJTF, dataRegistroJTF, medicoResponsavelJTF;
+        public PainelCentro()
+        {
+            setLayout(new GridLayout(5, 2));
 
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+            
+            // 2º linha
+            add(new JLabel("Diagnostico"));
+            add(diagnosticoJTF = new JTextField());
+
+            // 3º linha
+            add(new JLabel("Tratamento"));
+            add(tratamentoJTF = new JTextField());
+
+            // 4º linha
+            add(new JLabel("Data de Reistro"));
+            add(dataRegistroJTF = new JTextField());
+
+            // 5º linha
+            add(new JLabel("Medico Responsavel"));
+            add(medicoResponsavelJTF = new JTextField());
+        }
     }
 
     class PainelSul extends JPanel implements ActionListener
