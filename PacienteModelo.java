@@ -5,7 +5,6 @@ Numero: 33019
 Ficheiro: PacienteModelo.java
 Data: 02/06/2025
 --------------------------------------*/
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

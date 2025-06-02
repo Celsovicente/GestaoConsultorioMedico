@@ -35,7 +35,8 @@ public class PagamentoVisao extends JFrame
     class PainelCentro extends JPanel
     {
         private JTextField idJTF, descricaoJTF, valorJTF, dataPagamentoJTF;
-        private JComboBox metodoPagamentoJCB; 
+        private JComboBox metodoPagamentoJCB;
+        private JTextFieldData txtData; 
         public PainelCentro()
         {
             setLayout(new GridLayout(5, 2));
@@ -54,11 +55,53 @@ public class PagamentoVisao extends JFrame
 
             // 4º linha
             add(new JLabel("Data de Pagamento"));
-            add(dataPagamentoJTF = new JTextField());
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
 
             // 5º linha
             add(new JLabel("Metodo de Pagamento"));
-            add(metodoPagamentoJCB = new JComboBox());
+            add(metodoPagamentoJCB = UInterfaceBox.createJComboBoxsTabela2("MetodoPagamento.tab"));
+        }
+
+        // getters
+        public int getId()
+        {
+            return Integer.parseInt(idJTF.getText().trim());
+        }
+
+        public String getDescricao()
+        {
+            return descricaoJTF.getText().trim();
+        }   
+
+        public float getValor()
+        {
+            return Float.parseFloat(valorJTF.getText().trim());
+        }
+
+        public String getDataPagamento()
+        {
+            return txtData.getDTestField().getText();
+        }
+
+        public String getMetodoPagamento()
+        {
+            return String.valueOf(metodoPagamentoJCB.getSelectedItem());
+        }
+        // metodo salvar
+        public void salvar()
+        {
+            PagamentoModelo modelo = new PagamentoModelo(
+            getId(),
+            getDescricao(),
+            getValor(),
+            getDataPagamento(),
+            getMetodoPagamento());
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
         }
     }
 
@@ -86,7 +129,7 @@ public class PagamentoVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+                centro.salvar();
             else
                 dispose();
         }
