@@ -109,11 +109,16 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuTabelas.add(horariosDisponiveisItem = new JMenuItem("Horarios Disponiveis"));   
 
         //adicionando evento de click
-
-
-        sairConsultaItem.addActionListener(this);
-        sairHistoricoItem.addActionListener(this);
+        novoPacienteItem.addActionListener(this);
         sairPacienteItem.addActionListener(this);
+        
+        novaConsultaItem.addActionListener(this);
+        sairConsultaItem.addActionListener(this);
+        
+        novoHistoricoItem.addActionListener(this);
+        sairHistoricoItem.addActionListener(this);
+        
+        novoPagamentoItem.addActionListener(this);
         sairPagamentoItem.addActionListener(this);
 
         nacionalidadeItem.addActionListener(this);
@@ -129,8 +134,15 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent event)
     {
-        
-        if(event.getSource() == nacionalidadeItem)
+        if(event.getSource() == novoPacienteItem)
+            new PacienteVisao();
+        else if(event.getSource() == novoHistoricoItem)
+            new HistoricoVisao();
+        else if(event.getSource() == novaConsultaItem)
+            new ConsultaVisao();
+        else if(event.getSource() == novoPagamentoItem)
+            new PagamentoVisao();
+        else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)
             Tabela2.editarNovosItems("MetodoPagamento.tab", "Novo Metodo de Pagamento");

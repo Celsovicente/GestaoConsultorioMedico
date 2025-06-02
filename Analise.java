@@ -25,14 +25,14 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     int id
     String nome
     String dataNascimento
-    String genero
-    String telefone
-    String email
     String numeroDocumento
+    String genero
     String nacionalidade
     String provincia    
     String muncicipio
     String comuna
+    String telefone
+    String email
     
 - ConsultaModelo
     int id

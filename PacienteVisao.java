@@ -36,9 +36,14 @@ public class PacienteVisao extends JFrame
     {
         private JTextField idJTF, nomeJTF, dataNascimentoJTF, telefoneJTF, emailJTF, numeroDocumentoJTF;
         private JComboBox generoJCB, nacionalidadeJCB, provinciaJCB, municipioJCB, comunaJCB; 
+        private String generoArray[] = {"Masculino", "Feminino"};
+        private JTextFieldData txtData;
+        private JComboBoxTabela3_Tabela3 provinciaComMunicipio;
+
         public PainelCentro()
         {
             setLayout(new GridLayout(12, 2));
+            provinciaComMunicipio = new JComboBoxTabela3_Tabela3("Provincias.tab", "Municipios.tab", "Comunas.tab");
 
             // 1º linha
             add(new JLabel("Id"));
@@ -50,7 +55,11 @@ public class PacienteVisao extends JFrame
 
             // 3º linha
             add(new JLabel("Data de Nascimento"));
-            add(dataNascimentoJTF = new JTextField());
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
 
             // 4º linha
             add(new JLabel("Numero de Documento"));
@@ -58,23 +67,23 @@ public class PacienteVisao extends JFrame
 
             // 5º linha
             add(new JLabel("Genero"));
-            add(generoJCB = new JComboBox());
+            add(generoJCB = new JComboBox(generoArray));
 
             // 6º linha
             add(new JLabel("Nacionalidade"));
-            add(nacionalidadeJCB = new JComboBox());
+            add(nacionalidadeJCB = UInterfaceBox.createJComboBoxsTabela2("Nacionalidades.tab"));
 
             // 7º linha
             add(new JLabel("Provincia"));
-            add(provinciaJCB = new JComboBox());
+            add(provinciaJCB = provinciaComMunicipio.getComboBoxFather());
 
             // 8º linha
             add(new JLabel("Municipio"));
-            add(municipioJCB = new JComboBox());
+            add(municipioJCB = provinciaComMunicipio.getComboBoxSun());
 
             // 9º linha
             add(new JLabel("Comuna"));
-            add(comunaJCB = new JComboBox());
+            add(comunaJCB = provinciaComMunicipio.getComboBoxNeto());
 
             // 10º linha
             add(new JLabel("Telefone"));
@@ -84,6 +93,81 @@ public class PacienteVisao extends JFrame
             add(new JLabel("Email"));
             add(emailJTF = new JTextField());
         }
+
+        // metodos getters
+        public int getId()
+        {
+            return Integer.parseInt(idJTF.getText().trim());
+        }
+
+        public String getNome()
+        {
+            return nomeJTF.getText().trim();
+        }
+
+        public String getDataNascimento()
+        {
+            return   txtData.getDTestField().getText();
+        }
+
+        public String getNumeroDocumento()
+        {
+            return numeroDocumentoJTF.getText().trim();
+        }
+
+        public String getGenero()
+        {
+            return String.valueOf(generoJCB.getSelectedItem());
+        }
+
+        public String getNacionalidade()
+        {
+            return String.valueOf(nacionalidadeJCB.getSelectedItem());
+        }
+
+        public String getProvincia()
+        {
+            return String.valueOf(provinciaJCB.getSelectedItem());
+        }
+
+        public String getMunicipio()
+        {
+            return String.valueOf(municipioJCB.getSelectedItem());
+        }
+
+        public String getComuna()
+        {
+            return String.valueOf(comunaJCB.getSelectedItem());
+        }
+
+        public String getTelefone()
+        {
+            return telefoneJTF.getText().trim();
+        }
+
+        public String getEmail()
+        {
+            return emailJTF.getText().trim();
+        }
+        // metodo salvar
+        public void salvar()
+        {
+            PacienteModelo modelo = new PacienteModelo(
+            getId() ,
+            getNome() ,
+            getDataNascimento() ,
+            getNumeroDocumento(), 
+            getGenero(), 
+            getNacionalidade() , 
+            getProvincia() , 
+            getMunicipio() ,
+            getComuna(), 
+            getTelefone(),
+            getEmail());
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
+        }
+
     }
 
     class PainelSul extends JPanel implements ActionListener
@@ -110,7 +194,7 @@ public class PacienteVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+                centro.salvar();
             else
                 dispose();
         }
