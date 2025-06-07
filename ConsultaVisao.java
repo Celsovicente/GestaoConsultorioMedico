@@ -34,35 +34,89 @@ public class ConsultaVisao extends JFrame
 
     class PainelCentro extends JPanel
     {
-        private JTextField idJTF, dataConsultaJTF, observacoesJTF;
+        private JTextField idJTF, dataConsultaJTF; 
         public JComboBox medicoJCB, especialidadeJCB, horaConsultaJCB;
+        private JComboBoxTabela2_Tabela3 especialidadeMedico;
+        private JTextFieldData txtData;
+        private JTextArea observacoesJTA;
+        private JScrollPane scroll;
+
         public PainelCentro()
         {
             setLayout(new GridLayout(6, 2));
-            
+            especialidadeMedico = new JComboBoxTabela2_Tabela3("Especialidades.tab", "Medicos.tab");
             // 1º linha
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
 
             // 2º linha
             add(new JLabel("Especialidade"));
-            add(especialidadeJCB = new JComboBox());
+            add(especialidadeJCB = especialidadeMedico.getComboBoxFather());
 
             // 3º linha
             add(new JLabel("Medico"));
-            add(medicoJCB = new JComboBox());
+            add(medicoJCB = especialidadeMedico.getComboBoxSun());
 
             // 4º linha
             add(new JLabel("Data da Consulta"));
-            add(dataConsultaJTF = new JTextField());
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
 
             // 5º linha
             add(new JLabel("Hora da Consulta"));
-            add(horaConsultaJCB = new JComboBox());
+            add(horaConsultaJCB = UInterfaceBox.createJComboBoxsTabela2("HorariosDisponiveis.tab"));
 
             // 6º linha
             add(new JLabel("Observacoes"));
-            add(observacoesJTF = new JTextField());
+            add(scroll = new JScrollPane(observacoesJTA = new JTextArea(5,10)));
+        }
+
+        // metodos getters
+        public int getId()
+        {
+            return Integer.parseInt(idJTF.getText().trim());
+        }
+
+        public String getEspecialidade()
+        {
+            return String.valueOf(especialidadeJCB.getSelectedItem());
+        }
+
+        public String getMedico()
+        {
+            return String.valueOf(medicoJCB.getSelectedItem());
+        }
+        
+        public String getDataConsulta()
+        {
+            return txtData.getDTestField().getText();
+        }
+
+        public String getHoraConsulta()
+        {
+            return String.valueOf(horaConsultaJCB.getSelectedItem());
+        }
+
+        public String getObservacoes()
+        {
+            return observacoesJTA.getText();
+        }
+
+        // metodo salvar
+        public void salvar()
+        {
+            ConsultaModelo modelo = new ConsultaModelo(
+                getId(),
+                getMedico(),
+                getEspecialidade(),
+                getDataConsulta(), 
+                getHoraConsulta(),
+                getObservacoes());
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
         }
     }
 
@@ -90,7 +144,7 @@ public class ConsultaVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+                centro.salvar();
             else
                 dispose();
         }

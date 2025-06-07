@@ -6,14 +6,14 @@ Ficheiro: PacienteModelo.java
 Data: 02/06/2025
 --------------------------------------*/
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
+import java.awt.*;
 import SwingComponents.*;
 import Calendario.*;
 import javax.swing.UIManager.*;
 import java.io.*;
 
-public class PacienteModelo 
+public class PacienteModelo implements RegistGeneric
 {  
     private int id;
     private StringBufferModelo nome, numeroDocumento, genero, nacionalidade, provincia, municipio, 
@@ -172,7 +172,7 @@ public class PacienteModelo
         dados += "Nome: " + getNome() + "\n";
         dados += "Data de Nascimento: " + getDataNascimento() + "\n";
         dados += "Numero do Documento: " + getNumeroDocumento() + "\n";
-        dados += "Genero" + getGenero() + "\n";
+        dados += "Genero: " + getGenero() + "\n";
         dados += "Nacionalidade: " + getNacionalidade() + "\n";
         dados += "Provincia: " + getProvincia() + "\n";
         dados += "Municipio: " + getMunicipio() + "\n";
@@ -181,5 +181,72 @@ public class PacienteModelo
         dados += "Email: " + getEmail() + "\n";
 
         return dados;
+    }
+
+    // calcular o tamanho dos bytes
+    public long sizeof()
+    {
+        try
+        {
+            return 220 * 2 + 4 + 12;
+        }
+        catch(Exception ex)
+        {
+            return 0;
+        }
+    }
+
+    // metodo write
+    public void write(RandomAccessFile stream)
+    {
+        try
+        {
+            stream.writeInt(id);
+            nome.write(stream);
+            dataNascimento.write(stream);
+            numeroDocumento.write(stream);
+            genero.write(stream);
+            nacionalidade.write(stream);
+            provincia.write(stream);
+            municipio.write(stream);
+            comuna.write(stream);
+            telefone.write(stream);
+            email.write(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao escrever no Ficheiro");
+        }
+    }
+
+    // metodo read
+    public void read(RandomAccessFile stream)
+    {
+        try
+        {
+            id = stream.readInt();
+            nome.read(stream);
+            dataNascimento.read(stream);
+            numeroDocumento.read(stream);
+            genero.read(stream);
+            nacionalidade.read(stream);
+            provincia.read(stream);
+            municipio.read(stream);
+            comuna.read(stream);
+            telefone.read(stream);
+            email.read(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao ler no ficheiro");
+        }
+    }
+
+    public void salvar()
+    {
+        PacienteFile file = new PacienteFile();
+        file.salvarDados(this);
     }
 }

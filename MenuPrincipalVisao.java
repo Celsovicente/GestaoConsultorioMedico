@@ -25,6 +25,10 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novoHistoricoItem, editarHistoricoItem, eliminarHistoricoItem, sairHistoricoItem;
     private JMenuItem nacionalidadeItem, municipioItem,  comunaItem, provinciaItem, metodoPagamentoItem, 
     especialidadeItem, horariosDisponiveisItem, medicoItem;
+    private JMenuItem listarPacientesItem, listarPagamentosItem, listarConsultasItem, listarHistoricoItem,
+    listarDefesaItem;
+    private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
+    pesquisarConsultaItem, pesquisarDefesaItem;
 
     public MenuPrincipalVisao()
     {
@@ -65,6 +69,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuBar.add(menuAjuda = new JMenu("Ajuda"));
         menuAjuda.setMnemonic('A');
         menuAjuda.setIcon(new ImageIcon("image/help.png"));
+        menuBar.add(menuDefesa = new JMenu("Defesa"));
+        menuDefesa.setMnemonic('D');
 
         // instanciando os elementos do menuPaciente
         menuPaciente.add(novoPacienteItem = new JMenuItem("Novo Paciente", new ImageIcon("image/novo24.png")));
@@ -98,6 +104,24 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuPagamento.addSeparator();
         menuPagamento.add(sairPagamentoItem = new JMenuItem("Sair", new ImageIcon("image/logout24.png")));
 
+        // instanciando os elementos do menuListagem
+        menuListagem.add(listarPacientesItem = new JMenuItem("Listar Pacientes"));
+        menuListagem.add(pesquisarPacientesItem = new JMenuItem("Pesquisar Pacientes"));
+        menuListagem.addSeparator();
+        menuListagem.add(listarConsultasItem = new JMenuItem("Listar Consultas"));
+        menuListagem.add(pesquisarConsultaItem = new JMenuItem("Pesquisar Consultas"));
+        menuListagem.addSeparator();
+        menuListagem.add(listarHistoricoItem = new JMenuItem("Listar Historico"));
+        menuListagem.add(pesquisarHistoricoItem = new JMenuItem("Pesquisar Historico"));
+        menuListagem.addSeparator();
+        menuListagem.add(listarPagamentosItem = new JMenuItem("Listar Pagamentos"));
+        menuListagem.add(pesquisarPagamentosItem = new JMenuItem("Pesquisar Pagamento"));
+        
+        // instanciando o menu defesa
+        menuDefesa.add(novaDefesaItem = new JMenuItem("Cadastrar Defesa"));
+        menuDefesa.add(listarDefesaItem = new JMenuItem("Listar Defesas"));
+        menuDefesa.add(pesquisarDefesaItem = new JMenuItem("Pesquisar Defesa"));
+
         // instancindo os elementos do menuTabela
         menuTabelas.add(nacionalidadeItem = new JMenuItem("Nacionalidades"));
         menuTabelas.add(provinciaItem = new JMenuItem("Provincias"));
@@ -110,16 +134,27 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
 
         //adicionando evento de click
         novoPacienteItem.addActionListener(this);
+        listarPacientesItem.addActionListener(this);
+        pesquisarPacientesItem.addActionListener(this);
         sairPacienteItem.addActionListener(this);
         
         novaConsultaItem.addActionListener(this);
+        listarConsultasItem.addActionListener(this);
+        pesquisarConsultaItem.addActionListener(this);
         sairConsultaItem.addActionListener(this);
         
         novoHistoricoItem.addActionListener(this);
+        listarHistoricoItem.addActionListener(this);
+        pesquisarHistoricoItem.addActionListener(this);
         sairHistoricoItem.addActionListener(this);
         
         novoPagamentoItem.addActionListener(this);
+        listarPagamentosItem.addActionListener(this);
+        pesquisarPagamentosItem.addActionListener(this);
         sairPagamentoItem.addActionListener(this);
+
+        listarDefesaItem.addActionListener(this);
+        pesquisarDefesaItem.addActionListener(this);
 
         nacionalidadeItem.addActionListener(this);
         provinciaItem.addActionListener(this);
@@ -142,6 +177,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             new ConsultaVisao();
         else if(event.getSource() == novoPagamentoItem)
             new PagamentoVisao();
+        else if(event.getSource() == listarPacientesItem)
+            PacienteFile.listarPacientes();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)

@@ -91,6 +91,7 @@ public class PagamentoVisao extends JFrame
         {
             return String.valueOf(metodoPagamentoJCB.getSelectedItem());
         }
+        
         // metodo salvar
         public void salvar()
         {

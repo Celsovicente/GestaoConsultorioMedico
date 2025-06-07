@@ -39,15 +39,19 @@ public class PacienteVisao extends JFrame
         private String generoArray[] = {"Masculino", "Feminino"};
         private JTextFieldData txtData;
         private JComboBoxTabela3_Tabela3 provinciaComMunicipio;
+        private PacienteFile file;
 
         public PainelCentro()
         {
             setLayout(new GridLayout(12, 2));
             provinciaComMunicipio = new JComboBoxTabela3_Tabela3("Provincias.tab", "Municipios.tab", "Comunas.tab");
+            file = new PacienteFile();
 
             // 1º linha
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setFocusable(false);
 
             // 2º linha
             add(new JLabel("Nome"));
@@ -166,6 +170,9 @@ public class PacienteVisao extends JFrame
             getEmail());
 
             JOptionPane.showMessageDialog(null, modelo.toString());
+            
+            modelo.salvar();
+            dispose();
         }
 
     }
