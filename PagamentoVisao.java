@@ -37,13 +37,18 @@ public class PagamentoVisao extends JFrame
         private JTextField idJTF, descricaoJTF, valorJTF, dataPagamentoJTF;
         private JComboBox metodoPagamentoJCB;
         private JTextFieldData txtData; 
+        private PagamentoFile file;
+
         public PainelCentro()
         {
             setLayout(new GridLayout(5, 2));
+            file = new PagamentoFile();
 
             // 1º linha
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setFocusable(false);
 
             // 2º linha
             add(new JLabel("Descricao"));
@@ -103,6 +108,8 @@ public class PagamentoVisao extends JFrame
             getMetodoPagamento());
 
             JOptionPane.showMessageDialog(null, modelo.toString());
+            modelo.salvar();
+            dispose();
         }
     }
 
@@ -153,7 +160,6 @@ public class PagamentoVisao extends JFrame
         {
         }
     }
-
 
     public static void main(String[] args)
     {

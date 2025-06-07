@@ -13,7 +13,7 @@ import Calendario.*;
 import javax.swing.UIManager.*;
 import java.io.*;
 
-public class ConsultaModelo 
+public class ConsultaModelo implements RegistGeneric
 {
 
     private int id;
@@ -116,5 +116,62 @@ public class ConsultaModelo
         dados += "Observacoes: " + getObservacoes() + "\n";
 
         return dados;
+    }
+
+    // calcular o tamanho dos bytes
+    public long sizeof()
+    {
+        try
+        {
+            return 140 * 2 + 4 + 12;
+        }
+        catch(Exception ex)
+        {
+            return 0;
+        }
+    }
+
+    // metodo write
+    public void write(RandomAccessFile stream)
+    {
+        try
+        {
+            stream.writeInt(id);
+            medico.write(stream);
+            especialidade.write(stream);
+            dataConsulta.write(stream);
+            horaConsulta.write(stream);
+            observacoes.write(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao escrever no Ficheiro");
+        }
+    }
+
+    // metodo read
+    public void read(RandomAccessFile stream)
+    {
+        try
+        {
+            id = stream.readInt();
+            medico.read(stream);
+            especialidade.read(stream);
+            dataConsulta.read(stream);
+            horaConsulta.read(stream);
+            observacoes.read(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao ler no ficheiro");
+        }
+    }
+
+    public void salvar()
+    {
+        ConsultaFile file = new ConsultaFile();
+        file.salvarDados(this);
     }
 }

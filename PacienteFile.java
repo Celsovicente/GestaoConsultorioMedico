@@ -50,7 +50,7 @@ public class PacienteFile extends ObjectsFile
         {
             file.stream.seek(4);
 
-            for(int i = 1; i < file.getNregistos(); i++)
+            for(int i = 0; i < file.getNregistos(); i++)
             {
                 modelo.read(file.stream);
 

@@ -13,9 +13,8 @@ import Calendario.*;
 import javax.swing.UIManager.*;
 import java.io.*;
 
-public class PagamentoModelo 
+public class PagamentoModelo implements RegistGeneric
 {
-
     private int id;
     private float valor;
     private StringBufferModelo descricao, metodoPagamento;
@@ -103,5 +102,60 @@ public class PagamentoModelo
         dados += "Metodo Pagamento: " + getMetodoPagamento() + "\n";
 
         return dados;
+    }
+
+    // calcular o tamanho dos bytes
+    public long sizeof()
+    {
+        try
+        {
+            return 140 * 2 + 4 + 12;
+        }
+        catch(Exception ex)
+        {
+            return 0;
+        }
+    }
+
+    // metodo write
+    public void write(RandomAccessFile stream)
+    {
+        try
+        {
+            stream.writeInt(id);
+            descricao.write(stream);
+            stream.writeFloat(valor);            
+            dataPagamento.write(stream);
+            metodoPagamento.write(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao escrever no Ficheiro");
+        }
+    }
+
+    // metodo read
+    public void read(RandomAccessFile stream)
+    {
+        try
+        {
+            id = stream.readInt();
+            descricao.read(stream);
+            valor = stream.readFloat();
+            dataPagamento.read(stream);
+            metodoPagamento.read(stream);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao ler no ficheiro");
+        }
+    }
+
+    public void salvar()
+    {
+        PagamentoFile file = new PagamentoFile();
+        file.salvarDados(this);
     }
 }

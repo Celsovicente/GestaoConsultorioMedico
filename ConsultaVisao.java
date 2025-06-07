@@ -40,14 +40,19 @@ public class ConsultaVisao extends JFrame
         private JTextFieldData txtData;
         private JTextArea observacoesJTA;
         private JScrollPane scroll;
+        private ConsultaFile file;
 
         public PainelCentro()
         {
             setLayout(new GridLayout(6, 2));
             especialidadeMedico = new JComboBoxTabela2_Tabela3("Especialidades.tab", "Medicos.tab");
+            file = new ConsultaFile();
             // 1º linha
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setFocusable(false);
+
 
             // 2º linha
             add(new JLabel("Especialidade"));
@@ -117,6 +122,9 @@ public class ConsultaVisao extends JFrame
                 getObservacoes());
 
             JOptionPane.showMessageDialog(null, modelo.toString());
+
+            modelo.salvar();
+            dispose();
         }
     }
 
