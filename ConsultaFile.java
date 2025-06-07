@@ -44,7 +44,7 @@ public class ConsultaFile extends ObjectsFile
     {
         ConsultaFile file = new ConsultaFile();
         ConsultaModelo modelo = new ConsultaModelo();
-        String dados = "Listagem dos Dados da Consulta\n\n";
+        String dados = "Listagem dos Dados da Consulta:\n\n";
 
         try
         {

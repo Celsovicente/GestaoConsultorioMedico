@@ -30,9 +30,9 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
     pesquisarConsultaItem, pesquisarDefesaItem;
 
-    public MenuPrincipalVisao()
+    public MenuPrincipal(String user)
     {
-        super("Menu Principal");
+        super("Menu Principal | Operador " +user);
 
         instanciarObjectos();
 
@@ -50,16 +50,16 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         // adicionando os elementos no menuBar
         menuBar.add(menuPaciente = new JMenu("Paciente"));
         menuPaciente.setMnemonic('P');
-        menuPaciente.setIcon(new ImageIcon("image/funcionario32.png"));
+        menuPaciente.setIcon(new ImageIcon("image/hospital.png"));
         menuBar.add(menuConsulta = new JMenu("Consulta"));
         menuConsulta.setMnemonic('C');
-        //menuConsulta.setIcon(new ImageIcon(""));
+        menuConsulta.setIcon(new ImageIcon("image/consulta.png"));
         menuBar.add(menuHistorico = new JMenu("Historico"));
         menuHistorico.setMnemonic('H');
-        //menuHistorico.setIcon(new ImageIcon(""));
+        menuHistorico.setIcon(new ImageIcon("image/historia.png"));
         menuBar.add(menuPagamento = new JMenu("Pagamento"));
         menuPagamento.setMnemonic('P');
-        //menuPagamento.setIcon(new ImageIcon(""));
+        menuPagamento.setIcon(new ImageIcon("image/pagamento.png"));
         menuBar.add(menuListagem = new JMenu("Listagens/Pesquisas"));
         menuListagem.setMnemonic('L');
         menuListagem.setIcon(new ImageIcon("image/search32.png"));
@@ -71,6 +71,7 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuAjuda.setIcon(new ImageIcon("image/help.png"));
         menuBar.add(menuDefesa = new JMenu("Defesa"));
         menuDefesa.setMnemonic('D');
+        //menuDefesa.setIcon(new ImageIcon("image/defesa.png"));
 
         // instanciando os elementos do menuPaciente
         menuPaciente.add(novoPacienteItem = new JMenuItem("Novo Paciente", new ImageIcon("image/novo24.png")));
@@ -215,6 +216,6 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new MenuPrincipalVisao();
+        new MenuPrincipalVisao("" +user);
     }
 }
