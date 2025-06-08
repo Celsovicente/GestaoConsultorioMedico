@@ -30,9 +30,9 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
     pesquisarConsultaItem, pesquisarDefesaItem;
 
-    public MenuPrincipal(String user)
+    public MenuPrincipalVisao(String user)
     {
-        super("Menu Principal | Operador " +user);
+        super("Menu Principal | Operador " +user);   
 
         instanciarObjectos();
 
@@ -216,6 +216,6 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new MenuPrincipalVisao("" +user);
+        new MenuPrincipalVisao("");
     }
 }

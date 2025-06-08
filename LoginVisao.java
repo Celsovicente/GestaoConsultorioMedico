@@ -23,7 +23,7 @@ public class LoginVisao extends JFrame
         super("Tela de Login");
 
         JPanel painelNorte = new JPanel();
-        JLabel lbImagem = new JLabel(new ImageIcon("image/descarregar(1).jpj"));
+        JLabel lbImagem = new JLabel(new ImageIcon("image/descarregar.jpg"));
         painelNorte.add(lbImagem);
         getContentPane().add(painelNorte , BorderLayout.NORTH);
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
@@ -36,21 +36,30 @@ public class LoginVisao extends JFrame
     }
 
     class PainelCentro extends JPanel 
-    {   
+    {
         private JTextField userJTF;
         private JPasswordField passwordJTF;
-        private String corretUser = "33019", corretPassword = "ucan";
+        private String correctUser = "33019", correctPassword = "ucan";
 
         public PainelCentro()
         {
-            setLayout(new GridLayout(2, 2));
-            
-            add(new JLabel("Username:"));
+            setLayout(new GridLayout(2,2));
+            add(new JLabel("Username: "));
             add(userJTF = new JTextField());
 
-            add(new JLabel("Password:"));
+            add(new JLabel("Password: "));
             add(passwordJTF = new JPasswordField());
+            //funcao para alterar o caracter da palavra passe
             passwordJTF.setEchoChar('#');
+
+             // Adiciona um KeyListener para o campo de senha
+            passwordJTF.addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        realizarLogin();
+                    }
+                }
+            });
         }
 
         public String getUser()
@@ -65,19 +74,32 @@ public class LoginVisao extends JFrame
 
         public boolean loginValido()
         {
-            if(getUser().equals(corretUser) && getPassword().equalsIgnoreCase(corretPassword))
-            return true;
+            if(getUser().equals(correctUser) && getPassword().equals(correctPassword))
+                return true;
 
             return false;
         }
+
+        public void realizarLogin()
+        {
+            if (loginValido()) {
+                String user = getUser();
+                dispose();
+                new MenuPrincipalVisao(user);
+            } else {
+                JOptionPane.showMessageDialog(null, "Login Invalido, tente novamente!",
+                        "Invalid Login", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
+
 
     class PainelSul extends JPanel implements ActionListener
     {
         JButton entrarJB, sairJB;
         public PainelSul()
         {
-            add(entrarJB = new JButton("Entrar", new ImageIcon("image/image/next24.png")));
+            add(entrarJB = new JButton("Entrar", new ImageIcon("image/next24.png")));
             add(sairJB = new JButton("Sair", new ImageIcon("image/logout24.png")));
 
 
@@ -92,15 +114,24 @@ public class LoginVisao extends JFrame
                 if(centro.loginValido())
                 {
                     String user = centro.getUser();
+
                     dispose();
-                    new MenuPrincipal(user);
+
+                    new MenuPrincipalVisao(user);
                 }
                 else
-                    JOptionPane.showMessageDialog(null, "Login Invalido, tente novamente!", "Invalid Login", JOptionPane.ERROR_MESSAGE);   
+                
+                    JOptionPane.showMessageDialog(null, "Login Invalido, tente novamente!", 
+							"Invalid Login", JOptionPane.ERROR_MESSAGE);
+                
             }
             else
                 dispose();
         }
     }
-
+     public static void main(String[] args)
+    {
+        Vector_Tabelas.inic();
+        new LoginVisao();
+    }
 }
