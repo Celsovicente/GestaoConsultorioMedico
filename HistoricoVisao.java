@@ -34,30 +34,83 @@ public class HistoricoVisao extends JFrame
 
     class PainelCentro extends JPanel
     {
-        private JTextField idJTF, diagnosticoJTF, tratamentoJTF, dataRegistroJTF, medicoResponsavelJTF;
+        private JTextField idJTF, diagnosticoJTF, dataRegistroJTF, medicoResponsavelJTF;
+        private JTextArea tratamentoJTA;
+        private JScrollPane scroll;
+        private HistoricoFile file;
+        private JTextFieldData txtData;
+
         public PainelCentro()
         {
             setLayout(new GridLayout(5, 2));
+            file = new HistoricoFile();
 
             // 1º linha
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setFocusable(false);
             
             // 2º linha
             add(new JLabel("Diagnostico"));
             add(diagnosticoJTF = new JTextField());
 
             // 3º linha
-            add(new JLabel("Tratamento"));
-            add(tratamentoJTF = new JTextField());
+            add(new JLabel("Para Tratamento"));
+            add(scroll = new JScrollPane(tratamentoJTA = new JTextArea(5,10)));   
 
             // 4º linha
-            add(new JLabel("Data de Reistro"));
-            add(dataRegistroJTF = new JTextField());
+            add(new JLabel("Data de Registro"));
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
 
             // 5º linha
             add(new JLabel("Medico Responsavel"));
             add(medicoResponsavelJTF = new JTextField());
+        }
+
+         // getters
+        public int getId()
+        {
+            return Integer.parseInt(idJTF.getText().trim());
+        }
+
+        public String getDiagnostico()
+        {
+            return diagnosticoJTF.getText().trim();
+        }
+
+        public String getTratamento()
+        {
+            return tratamentoJTA.getText();
+        }
+
+        public String getMedicoResponsavel()
+        {
+            return medicoResponsavelJTF.getText().trim();
+        }
+
+        public String getDataRegistro()
+        {
+            return txtData.getDTestField().getText();
+        }
+
+        // metodo salvar
+        public void salvar()
+        {
+            HistoricoModelo modelo = new HistoricoModelo(
+            getId(),
+            getDiagnostico(),
+            getTratamento(),
+            getMedicoResponsavel(),
+            getDataRegistro());
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
+            modelo.salvar();
+            dispose();
         }
     }
 
@@ -85,7 +138,7 @@ public class HistoricoVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                JOptionPane.showMessageDialog(null, "Salvo com Sucesso");
+                centro.salvar();
             else
                 dispose();
         }

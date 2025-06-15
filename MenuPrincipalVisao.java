@@ -184,6 +184,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             ConsultaFile.listarConsultas();
         else if(event.getSource() == listarPagamentosItem)
             PagamentoFile.listarPagamentos();
+        else if(event.getSource() == listarHistoricoItem)
+            HistoricoFile.listarHistoricos();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)
