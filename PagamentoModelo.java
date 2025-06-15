@@ -109,7 +109,7 @@ public class PagamentoModelo implements RegistGeneric
     {
         try
         {
-            return 140 * 2 + 4 + 12;
+            return 40 * 2 + 4 + 12 + 4;
         }
         catch(Exception ex)
         {

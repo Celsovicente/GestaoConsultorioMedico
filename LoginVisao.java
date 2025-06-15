@@ -93,7 +93,6 @@ public class LoginVisao extends JFrame
         }
     }
 
-
     class PainelSul extends JPanel implements ActionListener
     {
         JButton entrarJB, sairJB;

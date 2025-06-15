@@ -75,7 +75,14 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
 - MetodoPagamento.tab
 - HorariosDisponiveis.tab
 
-6. Diversos
-6.1 - Implementação: Java Swing
-6.2 - IDE:VS Code
+6 - Listagens e Pesquisas
+Listagem dos Pacientes
+Listagem dos Pagamentos 
+Listagem das Consultas
+Listagem do Historico
+
+
+7. Diversos
+7.1 - Implementação: Java Swing
+7.2 - IDE:VS Code
 */
