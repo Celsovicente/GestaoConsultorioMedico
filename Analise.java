@@ -33,7 +33,8 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     String comuna
     String telefone
     String email
-    
+    boolean status
+
 - ConsultaModelo
     int id
     PacienteModelo paciente [Fk]
@@ -42,6 +43,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     String dataConsulta
     String horaConsulta
     String observacoes
+    boolean status
 
 - PagamentoModelo
     int id
@@ -50,6 +52,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     double valor
     String dataPagamento
     String metodoPagamento
+    boolean status
 
 - HistoricoPacienteModelo
     int id
@@ -58,6 +61,7 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
     String tratamento
     String dataRegistro
     String medicoResponsavel
+    boolean status
 
 4. Ficheiro | Persistência de Dados
 - PacienteFile.dat

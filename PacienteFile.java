@@ -70,11 +70,11 @@ public class PacienteFile extends ObjectsFile
         }
     }
 
-    /* 
-           public static void listarFormando()
+    // getPacientePorNome
+    public static PacienteModelo pesquisarPorNome(String nomeProcurado)
     {
-        FormandoFile file = new FormandoFile();
-        FormandoModelo modelo = new FormandoModelo();
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -85,19 +85,71 @@ public class PacienteFile extends ObjectsFile
             for(int i = 0; i < file.getNregistos(); i++)
             {
                 modelo.read(file.stream);
-                
-                if(modelo.getStatus() == true)
-                {
-                    dados += "========================================\n";
-                    dados += modelo.toString() + "\n\n";
-                }
+
+                if(modelo.getNome().equalsIgnoreCase(nomeProcurado))
+                    return modelo;
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    public static StringVector getAllNames()
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                //if(modelo.getStatus() == true)
+                    vetor.add(modelo.getNome());
             }
             
-            JTextArea area = new JTextArea(40 , 60);
-            area.setText(dados);
-            area.setFocusable(false);
-            JOptionPane.showMessageDialog(null, new JScrollPane(area),
-            "Gestao de Um Centro de Formacao Profissional", JOptionPane.INFORMATION_MESSAGE);
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+    public static void pesquisarPorNumeroDocumento(String numeroDocumentoProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, numero do documento nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
         catch(Exception ex)
         {
@@ -105,5 +157,101 @@ public class PacienteFile extends ObjectsFile
         }
     }
 
-     */
+    public static int pesquisarPorId(int idProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    break;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return idProcurado;
+    }
+
+    public static void pesquisarPorTelefone(String telefoneProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, telefone nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    //pesquisarPorGenero
+        public static void pesquisarPorGenero(String generoProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getGenero().equalsIgnoreCase(generoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, genero nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }
