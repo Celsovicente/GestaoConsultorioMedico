@@ -17,15 +17,23 @@ public class PagamentoVisao extends JFrame
 {
     private PainelCentro centro;
     private PainelSul sul;
+    private boolean editar;
 
-    public PagamentoVisao()
+    public PagamentoVisao(boolean alterar, PagamentoModelo modelo)
     {
+
         super("Cadastro dos Pagamentos");
 
+        editar = alterar;
+
         definirTema();
-        
-        getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
-        getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
+        if(!alterar)
+        {
+            	getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
+        }
+        else
+            getContentPane().add(centro = new PainelCentro(modelo), BorderLayout.CENTER);
+         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
         setSize(400, 250);
         setLocationRelativeTo(null);
@@ -71,6 +79,44 @@ public class PagamentoVisao extends JFrame
             add(metodoPagamentoJCB = UInterfaceBox.createJComboBoxsTabela2("MetodoPagamento.tab"));
         }
 
+        // construtor com parametros
+        public PainelCentro(PagamentoModelo modelo)
+        {
+            setLayout(new GridLayout(5, 2));
+            file = new PagamentoFile();
+
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setText("000" +modelo.getId());
+            idJTF.setFocusable(false);
+
+            // 2º linha
+            add(new JLabel("Descricao"));
+            add(descricaoJTF = new JTextField());
+            descricaoJTF.setText(modelo.getDescricao());
+
+            // 3º linha
+            add(new JLabel("Valor"));
+            add(valorJTF = new JTextField());
+            valorJTF.setText("000" +modelo.getValor());
+
+            // 4º linha
+            add(new JLabel("Data de Pagamento"));
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
+            txtData.getDTestField().setText(modelo.getDataPagamento());
+
+            // 5º linha
+            add(new JLabel("Metodo de Pagamento"));
+            add(metodoPagamentoJCB = UInterfaceBox.createJComboBoxsTabela2("MetodoPagamento.tab"));
+            metodoPagamentoJCB.setSelectedItem(modelo.getMetodoPagamento());
+        }
+ 
         // getters
         public int getId()
         {
@@ -95,6 +141,32 @@ public class PagamentoVisao extends JFrame
         public String getMetodoPagamento()
         {
             return String.valueOf(metodoPagamentoJCB.getSelectedItem());
+        }
+        
+        // metodos setters
+        public void setId(int id)
+        {
+            idJTF.setText("000" +id);
+        }
+
+        public void setDescricao(String descricao)
+        {
+            descricaoJTF.setText(descricao);
+        }   
+
+        public void setValor(float valor)
+        {
+            valorJTF.setText("000" + valor);
+        }
+
+        public void setDataPagamento(String data)
+        {
+            txtData.getDTestField().setText(data);
+        }
+
+        public void setMetodoPagamento(String metodoPagamento)
+        {
+           metodoPagamentoJCB.setSelectedItem(metodoPagamento);
         }
         
         // metodo salvar
@@ -164,6 +236,6 @@ public class PagamentoVisao extends JFrame
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new PagamentoVisao();
+        new PagamentoVisao(false, new PagamentoModelo());
     }
 }

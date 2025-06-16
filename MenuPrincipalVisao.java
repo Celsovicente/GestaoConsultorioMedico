@@ -135,21 +135,29 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
 
         //adicionando evento de click
         novoPacienteItem.addActionListener(this);
+        editarPacienteItem.addActionListener(this);
+        eliminarConsultaItem.addActionListener(this);
         listarPacientesItem.addActionListener(this);
         pesquisarPacientesItem.addActionListener(this);
         sairPacienteItem.addActionListener(this);
         
         novaConsultaItem.addActionListener(this);
+        editarConsultaItem.addActionListener(this);
+        eliminarConsultaItem.addActionListener(this);
         listarConsultasItem.addActionListener(this);
         pesquisarConsultaItem.addActionListener(this);
         sairConsultaItem.addActionListener(this);
         
         novoHistoricoItem.addActionListener(this);
+        editarHistoricoItem.addActionListener(this);
+        eliminarPagamentoItem.addActionListener(this);
         listarHistoricoItem.addActionListener(this);
         pesquisarHistoricoItem.addActionListener(this);
         sairHistoricoItem.addActionListener(this);
         
         novoPagamentoItem.addActionListener(this);
+        editarPagamentoItem.addActionListener(this);
+        eliminarPagamentoItem.addActionListener(this);
         listarPagamentosItem.addActionListener(this);
         pesquisarPagamentosItem.addActionListener(this);
         sairPagamentoItem.addActionListener(this);
@@ -164,8 +172,7 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         metodoPagamentoItem.addActionListener(this);
         medicoItem.addActionListener(this);
         especialidadeItem.addActionListener(this);
-        horariosDisponiveisItem.addActionListener(this);
-        
+        horariosDisponiveisItem.addActionListener(this);       
     }
 
     public void actionPerformed(ActionEvent event)
@@ -177,7 +184,9 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         else if(event.getSource() == novaConsultaItem)
             new ConsultaVisao();
         else if(event.getSource() == novoPagamentoItem)
-            new PagamentoVisao();
+            new PagamentoVisao(false, new PagamentoModelo());
+        else if(event.getSource() == editarPagamentoItem)
+            new EditarPagamento();
         else if(event.getSource() == listarPacientesItem)
             PacienteFile.listarPacientes();
         else if(event.getSource() == listarConsultasItem)
