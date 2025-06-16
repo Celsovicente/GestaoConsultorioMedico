@@ -175,7 +175,7 @@ public class PacienteFile extends ObjectsFile
                 if(modelo.getId() == idProcurado)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
-                    break;
+                    return 0;
                 }
             }
                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
@@ -245,6 +245,40 @@ public class PacienteFile extends ObjectsFile
                 else
                 {
                     JOptionPane.showMessageDialog(null, "Erro, genero nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    // pesquisarPorNacionalidade
+    public static void pesquisarPorNacionalidade(String nacionalidadeProcurada)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, nacionalidade nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
                 }
             }

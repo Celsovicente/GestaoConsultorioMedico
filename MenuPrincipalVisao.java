@@ -166,7 +166,7 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         especialidadeItem.addActionListener(this);
         horariosDisponiveisItem.addActionListener(this);
         
-        }
+    }
 
     public void actionPerformed(ActionEvent event)
     {
@@ -188,6 +188,12 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             HistoricoFile.listarHistoricos();
         else if(event.getSource() == pesquisarPacientesItem)
             new PesquisarPaciente();
+        else if(event.getSource() == pesquisarConsultaItem)
+            new PesquisarConsulta();
+        else if(event.getSource() == pesquisarHistoricoItem)
+            new PesquisarHistorico();
+        else if(event.getSource() == pesquisarPagamentosItem)
+             new PesquisarPagamento();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)

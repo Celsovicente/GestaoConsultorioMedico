@@ -69,4 +69,68 @@ public class ConsultaFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+
+    public static int pesquisarPorId(int idProcurado)
+    {
+        ConsultaFile file = new ConsultaFile();
+        ConsultaModelo modelo = new ConsultaModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return 0;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return idProcurado;
+    }
+
+    public static void pesquisarPorMedico(String medicoProcurado)
+    {
+        ConsultaFile file = new ConsultaFile();
+        ConsultaModelo modelo = new ConsultaModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getMedico().equalsIgnoreCase(medicoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, medico nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

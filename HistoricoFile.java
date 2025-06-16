@@ -69,4 +69,68 @@ public class HistoricoFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+
+    public static int pesquisarPorId(int idProcurado)
+    {
+        HistoricoFile file = new HistoricoFile();
+        HistoricoModelo modelo = new HistoricoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return 0;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return idProcurado;
+    }
+
+    public static void pesquisarPorDiagnostico(String diagnosticoProcurado)
+    {
+        HistoricoFile file = new HistoricoFile();
+        HistoricoModelo modelo = new HistoricoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getDiagnostico().equalsIgnoreCase(diagnosticoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

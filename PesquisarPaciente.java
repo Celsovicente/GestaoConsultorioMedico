@@ -1,6 +1,6 @@
 /*---------------------------------------------------
-Tema: Gestão de um Consultorio Medico
-Nome: Celso Vicente
+Tema: Gestão de Consultorio Medico
+Nome: Celso Segunda Vicente
 Numero: 33019
 Ficheiro: PesquisarPaciente.java
 Data: 15.06.2025
@@ -32,14 +32,14 @@ public class PesquisarPaciente extends JFrame
     class PainelCentro extends JPanel implements ActionListener
     {
         private JComboBox nomesJCB;
-        private JTextField numeroDocumentoJTF, idJTF, generoJTF, telefoneJTF;
+        private JTextField numeroDocumentoJTF, idJTF, generoJTF, telefoneJTF, nacionalidadeJTF;
         private JRadioButton pesquisarPorNome, pesquisarPorDocumento, pesquisarPorId, 
-        pesquisarPorTelefone, pesquisarPorGenero;
+        pesquisarPorTelefone, pesquisarPorGenero, pesquisarPorNacionalidade;
         private ButtonGroup grupo;
     
         public PainelCentro()
         {
-            setLayout(new GridLayout(10, 5));
+            setLayout(new GridLayout(9, 2));
             
             grupo = new ButtonGroup();
 
@@ -48,12 +48,14 @@ public class PesquisarPaciente extends JFrame
             add(pesquisarPorId = new JRadioButton("Pesquisar Por Id"));
             add(pesquisarPorTelefone = new JRadioButton("Pesquisar Por Telefone"));
             add(pesquisarPorGenero = new JRadioButton("Pesquisar Por Genero"));
+            add(pesquisarPorNacionalidade = new JRadioButton("Pequisar Por Nacionalidade"));
 
             grupo.add(pesquisarPorNome);
             grupo.add(pesquisarPorDocumento);
             grupo.add(pesquisarPorId);
             grupo.add(pesquisarPorTelefone);
             grupo.add(pesquisarPorGenero);
+            grupo.add(pesquisarPorNacionalidade);
             
             add(new JLabel("Escolha o Nome Procurado"));
             add(nomesJCB = new JComboBox (PacienteFile.getAllNames()));
@@ -74,12 +76,17 @@ public class PesquisarPaciente extends JFrame
             add(new JLabel("Digite o Genero Procurado"));
             add(generoJTF = new JTextField());
             generoJTF.setEnabled(false);
+
+            add(new JLabel("Digite a Nacionalidade Procurada"));
+            add(nacionalidadeJTF = new JTextField());
+            nacionalidadeJTF.setEnabled(false);
             
             pesquisarPorNome.addActionListener(this);
             pesquisarPorDocumento.addActionListener(this);
             pesquisarPorId.addActionListener(this);
             pesquisarPorTelefone.addActionListener(this); 
             pesquisarPorGenero.addActionListener(this);
+            pesquisarPorNacionalidade.addActionListener(this);
         }
 
         public String getNomeProcurado()
@@ -107,6 +114,11 @@ public class PesquisarPaciente extends JFrame
             return generoJTF.getText().trim();
         }
 
+        public String getNacionalidadeProcurada()
+        {
+            return nacionalidadeJTF.getText().trim();
+        }
+
         public int getTipoPesquisa()
         {
             if(pesquisarPorNome.isSelected())
@@ -117,8 +129,10 @@ public class PesquisarPaciente extends JFrame
                 return 3;
             else if(pesquisarPorTelefone.isSelected())
                 return 4;
-            else
+            else if(pesquisarPorGenero.isSelected())
                 return 5;
+            else 
+                return 6;
         }
 
         public void actionPerformed(ActionEvent event)
@@ -130,6 +144,7 @@ public class PesquisarPaciente extends JFrame
                 idJTF.setEnabled(false);
                 telefoneJTF.setEnabled(false);
                 generoJTF.setEnabled(false);
+                nacionalidadeJTF.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorDocumento)
             {
@@ -138,6 +153,7 @@ public class PesquisarPaciente extends JFrame
                 idJTF.setEnabled(false);
                 telefoneJTF.setEnabled(false);
                 generoJTF.setEnabled(false);
+                nacionalidadeJTF.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorId)
             {
@@ -146,6 +162,7 @@ public class PesquisarPaciente extends JFrame
                 idJTF.setEnabled(true);
                 telefoneJTF.setEnabled(false);
                 generoJTF.setEnabled(false);
+                nacionalidadeJTF.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorTelefone)
             {
@@ -154,6 +171,7 @@ public class PesquisarPaciente extends JFrame
                 idJTF.setEnabled(false);
                 telefoneJTF.setEnabled(true);
                 generoJTF.setEnabled(false);
+                nacionalidadeJTF.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorGenero)
             {
@@ -162,6 +180,16 @@ public class PesquisarPaciente extends JFrame
                 idJTF.setEnabled(false);
                 telefoneJTF.setEnabled(false);
                 generoJTF.setEnabled(true);   
+                nacionalidadeJTF.setEnabled(false);
+            }
+            else if(event.getSource() == pesquisarPorNacionalidade)
+            {
+                    nomesJCB.setEnabled(false);
+                numeroDocumentoJTF.setEnabled(false);
+                idJTF.setEnabled(false);
+                telefoneJTF.setEnabled(false);
+                generoJTF.setEnabled(false);   
+                nacionalidadeJTF.setEnabled(true);    
             }
         }
     }
@@ -193,6 +221,8 @@ public class PesquisarPaciente extends JFrame
                     PacienteFile.pesquisarPorTelefone(centro.getTelefoneProcurado());
                 else if(centro.getTipoPesquisa() == 5)
                     PacienteFile.pesquisarPorGenero(centro.getGeneroProcurado());          
+                else if(centro.getTipoPesquisa() == 6)
+                    PacienteFile.pesquisarPorNacionalidade(centro.getNacionalidadeProcurada());
             }
             else 
                 dispose();

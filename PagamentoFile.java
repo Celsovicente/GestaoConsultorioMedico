@@ -69,4 +69,68 @@ public class PagamentoFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+
+    public static int pesquisarPorId(int idProcurado)
+    {
+        PagamentoFile file = new PagamentoFile();
+        PagamentoModelo modelo = new PagamentoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return 0;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return idProcurado;
+    }
+
+    public static void pesquisarPorDescricao(String descricaoProcurada)
+    {
+        PagamentoFile file = new PagamentoFile();
+        PagamentoModelo modelo = new PagamentoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, descricao nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }
