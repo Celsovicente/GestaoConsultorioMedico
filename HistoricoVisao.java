@@ -17,15 +17,23 @@ public class HistoricoVisao extends JFrame
 {
     private PainelCentro centro;
     private PainelSul sul;
+    private boolean editar;
 
-    public HistoricoVisao()
+    public HistoricoVisao(boolean alterar, HistoricoModelo modelo)
     {
         super("Cadastro do Historico do Paciente");
 
+        editar = alterar;
+
         definirTema();
         
-        getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
-        getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
+        if(!alterar)
+        {
+            	getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
+        }
+        else
+            getContentPane().add(centro = new PainelCentro(modelo), BorderLayout.CENTER);
+         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
         setSize(400, 250);
         setLocationRelativeTo(null);
@@ -72,6 +80,43 @@ public class HistoricoVisao extends JFrame
             add(medicoResponsavelJTF = new JTextField());
         }
 
+        public PainelCentro(HistoricoModelo modelo)
+        {
+            setLayout(new GridLayout(5, 2));
+            file = new HistoricoFile();
+
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setText("" + modelo.getId());
+            idJTF.setFocusable(false);
+            
+            // 2º linha
+            add(new JLabel("Diagnostico"));
+            add(diagnosticoJTF = new JTextField());
+            diagnosticoJTF.setText(modelo.getDiagnostico());
+
+            // 3º linha
+            add(new JLabel("Para Tratamento"));
+            add(scroll = new JScrollPane(tratamentoJTA = new JTextArea(5,10)));   
+            tratamentoJTA.setText(modelo.getTratamento());
+
+            // 4º linha
+            add(new JLabel("Data de Registro"));
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
+            txtData.getDTestField().setText(modelo.getDataRegistro());
+
+            // 5º linha
+            add(new JLabel("Medico Responsavel"));
+            add(medicoResponsavelJTF = new JTextField());
+            medicoResponsavelJTF.setText(modelo.getMedicoResponsavel());
+        }
+        
          // getters
         public int getId()
         {
@@ -96,6 +141,32 @@ public class HistoricoVisao extends JFrame
         public String getDataRegistro()
         {
             return txtData.getDTestField().getText();
+        }
+
+        // metodos setters
+        public void setId(int id)
+        {
+           idJTF.setText("" +id);
+        }
+
+        public void setDiagnostico(String diagnostico)
+        {
+            diagnosticoJTF.setText(diagnostico);
+        }
+
+        public void setTratamento(String tratamento)
+        {
+            tratamentoJTA.setText(tratamento);
+        }
+
+        public void setMedicoResponsavel(String medicoResponsavel)
+        {
+            medicoResponsavelJTF.setText(medicoResponsavel);
+        }
+
+        public void setDataRegistro(String data)
+        {
+            txtData.getDTestField().setText(data);
         }
 
         // metodo salvar
@@ -166,6 +237,6 @@ public class HistoricoVisao extends JFrame
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new HistoricoVisao();
+        new HistoricoVisao(false, new HistoricoModelo());
     }
 }

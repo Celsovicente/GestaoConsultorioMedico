@@ -133,4 +133,71 @@ public class HistoricoFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+
+    // metodo de pesquisa para edicao
+    public static HistoricoModelo getPesquisaPorId(int idProcurado)
+    {
+        HistoricoFile file = new HistoricoFile();
+        HistoricoModelo modelo = new HistoricoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    // getPesquisarPorDiagnostico
+    public static HistoricoModelo getPesquisarPorDiagnostico(String diagnosticoProcurado)
+    {
+        HistoricoFile file = new HistoricoFile();
+        HistoricoModelo modelo = new HistoricoModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getDiagnostico().equalsIgnoreCase(diagnosticoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
 }

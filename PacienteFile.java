@@ -290,4 +290,212 @@ public class PacienteFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+
+    // pesquisas para edicao
+    public static PacienteModelo getPesquisarPorId(int idProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getId() == idProcurado)
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+            }
+               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    // getPesquisarPorNome 
+    public static PacienteModelo getPesquisarPorNome(String nomeProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getNome().equalsIgnoreCase(nomeProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, nome nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    // getPesquisarPorNumeroDocumento 
+    public static PacienteModelo getPesquisarPorNumeroDocumento(String numeroDocumentoProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, numero documento nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    // getPesquisarPorTelefone 
+    public static PacienteModelo getPesquisarPorTelefone(String telefoneProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, telefone nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+    // getPesquisarPorGenero 
+    public static PacienteModelo getPesquisarPorGenero(String generoProcurado)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getGenero().equalsIgnoreCase(generoProcurado))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, genero nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
+
+
+    // getPesquisarPorNacionalidade 
+    public static PacienteModelo getPesquisarPorNacionalidade(String nacionalidadeProcurada)
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return modelo;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, nacionalidade nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return modelo;
+    }
 }

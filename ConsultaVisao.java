@@ -17,15 +17,23 @@ public class ConsultaVisao extends JFrame
 {
     private PainelCentro centro;
     private PainelSul sul;
+    private boolean editar;
 
-    public ConsultaVisao()
+    public ConsultaVisao(boolean alterar, ConsultaModelo modelo)
     {
         super("Marcacao das Consultas");
 
         definirTema();
-        
-        getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
-        getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
+
+        editar = alterar;
+
+        if(!alterar)
+        {
+            	getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
+        }
+        else
+            getContentPane().add(centro = new PainelCentro(modelo), BorderLayout.CENTER);
+         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
         setSize(400, 280);
         setLocationRelativeTo(null);
@@ -79,6 +87,49 @@ public class ConsultaVisao extends JFrame
             add(scroll = new JScrollPane(observacoesJTA = new JTextArea(5,10)));
         }
 
+        public PainelCentro(ConsultaModelo modelo)
+        {
+            setLayout(new GridLayout(6, 2));
+            especialidadeMedico = new JComboBoxTabela2_Tabela3("Especialidades.tab", "Medicos.tab");
+            file = new ConsultaFile();
+            // 1º linha
+            add(new JLabel("Id"));
+            add(idJTF = new JTextField());
+            idJTF.setText("000" + file.getProximoCodigo());
+            idJTF.setText("" + modelo.getId());
+            idJTF.setFocusable(false);
+
+
+            // 2º linha
+            add(new JLabel("Especialidade"));
+            add(especialidadeJCB = especialidadeMedico.getComboBoxFather());
+            especialidadeJCB.setSelectedItem(modelo.getEspecialidade());
+
+            // 3º linha
+            add(new JLabel("Medico"));
+            add(medicoJCB = especialidadeMedico.getComboBoxSun());
+            medicoJCB.setSelectedItem(modelo.getMedico());
+
+            // 4º linha
+            add(new JLabel("Data da Consulta"));
+            JPanel painelData = new JPanel( new GridLayout(1, 1) );
+			txtData = new JTextFieldData("Data ?");
+			painelData.add( txtData.getDTestField());
+			painelData.add( txtData.getDButton());
+			add(painelData);
+            txtData.getDTestField().setText(modelo.getDataConsulta());
+
+            // 5º linha
+            add(new JLabel("Hora da Consulta"));
+            add(horaConsultaJCB = UInterfaceBox.createJComboBoxsTabela2("HorariosDisponiveis.tab"));
+            horaConsultaJCB.setSelectedItem(modelo.getHoraConsulta());
+
+            // 6º linha
+            add(new JLabel("Observacoes"));
+            add(scroll = new JScrollPane(observacoesJTA = new JTextArea(5,10)));
+            observacoesJTA.setText(modelo.getObservacoes());
+        }
+
         // metodos getters
         public int getId()
         {
@@ -109,6 +160,38 @@ public class ConsultaVisao extends JFrame
         {
             return observacoesJTA.getText();
         }
+
+        // metodos setters
+        public void setId(int id)
+        {
+           idJTF.setText("" + id);
+        }
+
+        public void setEspecialidade(String especialidade)
+        {
+            especialidadeJCB.setSelectedItem(especialidade);
+        }
+
+        public void setMedico(String medico)
+        {
+            medicoJCB.setSelectedItem(medico);
+        }
+        
+        public void setDataConsulta(String data)
+        {
+            txtData.getDTestField().setText(data);
+        }
+
+        public void setHoraConsulta(String hora)
+        {
+            horaConsultaJCB.setSelectedItem(hora);
+        }
+
+        public void setObservacoes(String observacoes)
+        {
+            observacoesJTA.setText(observacoes);
+        }
+
 
         // metodo salvar
         public void salvar()
@@ -179,6 +262,6 @@ public class ConsultaVisao extends JFrame
     public static void main(String[] args)
     {
         Vector_Tabelas.inic();
-        new ConsultaVisao();
+        new ConsultaVisao(false, new ConsultaModelo());
     }
 }

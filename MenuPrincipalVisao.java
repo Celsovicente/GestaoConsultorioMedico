@@ -178,15 +178,21 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent event)
     {
         if(event.getSource() == novoPacienteItem)
-            new PacienteVisao();
+            new PacienteVisao(false, new PacienteModelo());
         else if(event.getSource() == novoHistoricoItem)
-            new HistoricoVisao();
+            new HistoricoVisao(false, new HistoricoModelo());
         else if(event.getSource() == novaConsultaItem)
-            new ConsultaVisao();
+            new ConsultaVisao(false, new ConsultaModelo());
         else if(event.getSource() == novoPagamentoItem)
             new PagamentoVisao(false, new PagamentoModelo());
         else if(event.getSource() == editarPagamentoItem)
             new EditarPagamento();
+        else if(event.getSource() == editarConsultaItem)
+            new EditarConsulta();
+        else if(event.getSource() == editarHistoricoItem)
+            new EditarHistorico();
+        else if(event.getSource() == editarPacienteItem)
+            new EditarPaciente();
         else if(event.getSource() == listarPacientesItem)
             PacienteFile.listarPacientes();
         else if(event.getSource() == listarConsultasItem)
