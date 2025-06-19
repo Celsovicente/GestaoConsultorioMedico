@@ -89,7 +89,7 @@ public class PagamentoVisao extends JFrame
             add(new JLabel("Id"));
             add(idJTF = new JTextField());
             idJTF.setText("000" + file.getProximoCodigo());
-            idJTF.setText("000" +modelo.getId());
+            idJTF.setText("" +modelo.getId());
             idJTF.setFocusable(false);
 
             // 2º linha
@@ -100,7 +100,7 @@ public class PagamentoVisao extends JFrame
             // 3º linha
             add(new JLabel("Valor"));
             add(valorJTF = new JTextField());
-            valorJTF.setText("000" +modelo.getValor());
+            valorJTF.setText("" +modelo.getValor());
 
             // 4º linha
             add(new JLabel("Data de Pagamento"));
@@ -146,7 +146,7 @@ public class PagamentoVisao extends JFrame
         // metodos setters
         public void setId(int id)
         {
-            idJTF.setText("000" +id);
+            idJTF.setText("" +id);
         }
 
         public void setDescricao(String descricao)
@@ -156,7 +156,7 @@ public class PagamentoVisao extends JFrame
 
         public void setValor(float valor)
         {
-            valorJTF.setText("000" + valor);
+            valorJTF.setText("" + valor);
         }
 
         public void setDataPagamento(String data)

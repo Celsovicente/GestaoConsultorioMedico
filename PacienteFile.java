@@ -71,7 +71,7 @@ public class PacienteFile extends ObjectsFile
     }
 
     // getPacientePorNome
-    public static PacienteModelo pesquisarPorNome(String nomeProcurado)
+    public static void pesquisarPorNome(String nomeProcurado)
     {
         PacienteFile file = new PacienteFile();
         PacienteModelo modelo = new PacienteModelo();
@@ -87,14 +87,16 @@ public class PacienteFile extends ObjectsFile
                 modelo.read(file.stream);
 
                 if(modelo.getNome().equalsIgnoreCase(nomeProcurado))
-                    return modelo;
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                }
             }
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
         }
-        return modelo;
+        return;
     }
 
     public static StringVector getAllNames()
@@ -222,7 +224,7 @@ public class PacienteFile extends ObjectsFile
     }
 
     //pesquisarPorGenero
-        public static void pesquisarPorGenero(String generoProcurado)
+    public static void pesquisarPorGenero(String generoProcurado)
     {
         PacienteFile file = new PacienteFile();
         PacienteModelo modelo = new PacienteModelo();
