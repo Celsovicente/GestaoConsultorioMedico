@@ -76,15 +76,30 @@ permitindo o cadastro de pacientes, marcação de consultas, controle de pagamen
 - Comunas.tab
 - Especialidades.tab
 - Medicos.tab
+- MedicoResponsavel.tab
 - MetodoPagamento.tab
 - HorariosDisponiveis.tab
 
 6 - Listagens e Pesquisas
 Listagem dos Pacientes
-Listagem dos Pagamentos 
-Listagem das Consultas
-Listagem do Historico
+Pesquisa por Id
+Pesquisa por Nome
+Pesquisa por NumeroDocumento
+Pesquisa por Genero
+Pesquisa por Nacionalidade
+Pesquisa Por Telefone
 
+Listagem dos Pagamentos 
+Pesquisa por Id
+Pesquisa por Descricao
+
+Listagem das Consultas
+Pesquisa por Id
+Pesquisa por Medico
+
+Listagem do Historico
+Pesquisa por Id
+Pesquisa por Historico
 
 7. Diversos
 7.1 - Implementação: Java Swing

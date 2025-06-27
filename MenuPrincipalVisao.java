@@ -24,7 +24,7 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novoPagamentoItem, editarPagamentoItem, eliminarPagamentoItem, sairPagamentoItem;
     private JMenuItem novoHistoricoItem, editarHistoricoItem, eliminarHistoricoItem, sairHistoricoItem;
     private JMenuItem nacionalidadeItem, municipioItem,  comunaItem, provinciaItem, metodoPagamentoItem, 
-    especialidadeItem, horariosDisponiveisItem, medicoItem;
+    especialidadeItem, horariosDisponiveisItem, medicoItem, medicoResponsavelItem;
     private JMenuItem listarPacientesItem, listarPagamentosItem, listarConsultasItem, listarHistoricoItem,
     listarDefesaItem;
     private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
@@ -131,7 +131,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuTabelas.add(metodoPagamentoItem = new JMenuItem("Metodos de Pagamento"));
         menuTabelas.add(especialidadeItem = new JMenuItem("Especialidades"));
         menuTabelas.add(medicoItem = new JMenuItem("Medicos"));
-        menuTabelas.add(horariosDisponiveisItem = new JMenuItem("Horarios Disponiveis"));   
+        menuTabelas.add(horariosDisponiveisItem = new JMenuItem("Horarios Disponiveis"));
+        menuTabelas.add(medicoResponsavelItem = new JMenuItem("Medico Reesponsavel"));   
 
         //adicionando evento de click
         novoPacienteItem.addActionListener(this);
@@ -172,7 +173,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         metodoPagamentoItem.addActionListener(this);
         medicoItem.addActionListener(this);
         especialidadeItem.addActionListener(this);
-        horariosDisponiveisItem.addActionListener(this);       
+        horariosDisponiveisItem.addActionListener(this);
+        medicoResponsavelItem.addActionListener(this);       
     }
 
     public void actionPerformed(ActionEvent event)
@@ -215,6 +217,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             Tabela2.editarNovosItems("MetodoPagamento.tab", "Novo Metodo de Pagamento");
         else if(event.getSource() == horariosDisponiveisItem)
             Tabela2.editarNovosItems("HorariosDisponiveis.tab", "Novo Horario Disponivel");
+        else if(event.getSource() == medicoResponsavelItem)
+            Tabela2.editarNovosItems("MedicoResponsavel.tab", "Novo Medico Responsavel");
         else if(event.getSource() == provinciaItem)
             Tabela2.editarNovosItems("Provincias.tab", "Nova Provincia");
         else if(event.getSource() == municipioItem)

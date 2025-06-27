@@ -42,7 +42,8 @@ public class HistoricoVisao extends JFrame
 
     class PainelCentro extends JPanel
     {
-        private JTextField idJTF, diagnosticoJTF, dataRegistroJTF, medicoResponsavelJTF;
+        private JTextField idJTF, diagnosticoJTF, dataRegistroJTF;
+        private JComboBox  medicoResponsavelJCB;
         private JTextArea tratamentoJTA;
         private JScrollPane scroll;
         private HistoricoFile file;
@@ -77,7 +78,7 @@ public class HistoricoVisao extends JFrame
 
             // 5º linha
             add(new JLabel("Medico Responsavel"));
-            add(medicoResponsavelJTF = new JTextField());
+            add(medicoResponsavelJCB = UInterfaceBox.createJComboBoxsTabela2("MedicoResponsavel.tab"));
         }
 
         public PainelCentro(HistoricoModelo modelo)
@@ -113,8 +114,8 @@ public class HistoricoVisao extends JFrame
 
             // 5º linha
             add(new JLabel("Medico Responsavel"));
-            add(medicoResponsavelJTF = new JTextField());
-            medicoResponsavelJTF.setText(modelo.getMedicoResponsavel());
+            add(medicoResponsavelJCB = UInterfaceBox.createJComboBoxsTabela2("MedicoResponsavel.tab"));
+            medicoResponsavelJCB.setSelectedItem(modelo.getMedicoResponsavel());
         }
         
          // getters
@@ -135,7 +136,7 @@ public class HistoricoVisao extends JFrame
 
         public String getMedicoResponsavel()
         {
-            return medicoResponsavelJTF.getText().trim();
+            return  String.valueOf(medicoResponsavelJCB.getSelectedItem());
         }
 
         public String getDataRegistro()
@@ -161,7 +162,7 @@ public class HistoricoVisao extends JFrame
 
         public void setMedicoResponsavel(String medicoResponsavel)
         {
-            medicoResponsavelJTF.setText(medicoResponsavel);
+            medicoResponsavelJCB.setSelectedItem(medicoResponsavel);
         }
 
         public void setDataRegistro(String data)
