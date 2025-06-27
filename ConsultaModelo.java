@@ -19,6 +19,7 @@ public class ConsultaModelo implements RegistGeneric
     private int id;
     private DataModelo dataConsulta;
     private StringBufferModelo especialidade, medico,horaConsulta, observacoes;
+    private boolean status;
 
     public ConsultaModelo()
     {
@@ -28,10 +29,11 @@ public class ConsultaModelo implements RegistGeneric
         dataConsulta = new DataModelo();
         horaConsulta = new StringBufferModelo("", 20);
         observacoes = new StringBufferModelo("", 50);
+        status = false;
     }
 
     public ConsultaModelo(int id, String medico, String especialidade, String dataConsulta, String horaConsulta,
-    String observacoes)
+    String observacoes, boolean status)
     {
         this.id = id;
         this.medico = new StringBufferModelo(medico, 40);
@@ -39,6 +41,7 @@ public class ConsultaModelo implements RegistGeneric
         this.dataConsulta = new DataModelo(dataConsulta);
         this.horaConsulta = new StringBufferModelo(horaConsulta, 20);
         this.observacoes = new StringBufferModelo(observacoes, 50);
+        this.status = status;
     }
 
     // metodos getters
@@ -72,6 +75,11 @@ public class ConsultaModelo implements RegistGeneric
         return observacoes.toStringEliminatingSpaces();
     }
 
+    public boolean getStatus()
+    {
+        return status;
+    }
+
     // metodos setters
     public void setId(int id)
     {
@@ -103,6 +111,11 @@ public class ConsultaModelo implements RegistGeneric
         this.observacoes = new StringBufferModelo(observacoes, 50);
     }
 
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
+
     // metodo toString
     public String toString()
     {
@@ -114,6 +127,7 @@ public class ConsultaModelo implements RegistGeneric
         dados += "Data da Consulta: " + getDataConsulta() + "\n";
         dados += "Hora da Consulta: " + getHoraConsulta() + "\n";
         dados += "Observacoes: " + getObservacoes() + "\n";
+        dados += "Estado: " + getStatus() + "\n";
 
         return dados;
     }
@@ -123,7 +137,7 @@ public class ConsultaModelo implements RegistGeneric
     {
         try
         {
-            return 140 * 2 + 4 + 12;
+            return 140 * 2 + 4 + 12 + 1;
         }
         catch(Exception ex)
         {
@@ -142,6 +156,7 @@ public class ConsultaModelo implements RegistGeneric
             dataConsulta.write(stream);
             horaConsulta.write(stream);
             observacoes.write(stream);
+            stream.writeBoolean(status);
         }
         catch(IOException ex)
         {
@@ -161,6 +176,7 @@ public class ConsultaModelo implements RegistGeneric
             dataConsulta.read(stream);
             horaConsulta.read(stream);
             observacoes.read(stream);
+            status = stream.readBoolean();
         }
         catch(IOException ex)
         {
@@ -173,5 +189,11 @@ public class ConsultaModelo implements RegistGeneric
     {
         ConsultaFile file = new ConsultaFile();
         file.salvarDados(this);
+    }
+
+    public void salvarDados()
+    {
+        ConsultaFile file = new ConsultaFile();
+        file.alterarDados(this);
     }
 }

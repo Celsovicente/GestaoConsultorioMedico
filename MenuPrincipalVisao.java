@@ -24,7 +24,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novoPagamentoItem, editarPagamentoItem, eliminarPagamentoItem, sairPagamentoItem;
     private JMenuItem novoHistoricoItem, editarHistoricoItem, eliminarHistoricoItem, sairHistoricoItem;
     private JMenuItem nacionalidadeItem, municipioItem,  comunaItem, provinciaItem, metodoPagamentoItem, 
-    especialidadeItem, horariosDisponiveisItem, medicoItem, medicoResponsavelItem;
+    especialidadeItem, horariosDisponiveisItem, medicoItem, medicoResponsavelItem, paroquiaItem, 
+    diocesseItem, centroItem;
     private JMenuItem listarPacientesItem, listarPagamentosItem, listarConsultasItem, listarHistoricoItem,
     listarDefesaItem;
     private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
@@ -211,6 +212,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             new PesquisarHistorico();
         else if(event.getSource() == pesquisarPagamentosItem)
              new PesquisarPagamento();
+        else if(event.getSource() == eliminarConsultaItem)
+            new EliminarConsulta();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)

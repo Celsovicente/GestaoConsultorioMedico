@@ -202,11 +202,30 @@ public class ConsultaVisao extends JFrame
                 getEspecialidade(),
                 getDataConsulta(), 
                 getHoraConsulta(),
-                getObservacoes());
+                getObservacoes(),
+                true);
 
             JOptionPane.showMessageDialog(null, modelo.toString());
 
             modelo.salvar();
+            dispose();
+        }
+
+        // metodo alterar
+        public void alterar()
+        {
+            ConsultaModelo modelo = new ConsultaModelo(
+                getId(),
+                getMedico(),
+                getEspecialidade(),
+                getDataConsulta(), 
+                getHoraConsulta(),
+                getObservacoes(),
+                true);
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
+
+            modelo.salvarDados();
             dispose();
         }
     }
@@ -235,7 +254,12 @@ public class ConsultaVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                centro.salvar();
+            {   
+                if(editar) 
+                    centro.alterar();
+                else
+                    centro.salvar();
+            }
             else
                 dispose();
         }

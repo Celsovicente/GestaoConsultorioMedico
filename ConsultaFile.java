@@ -40,6 +40,77 @@ public class ConsultaFile extends ObjectsFile
         }
     }
 
+    public void alterarDados(ConsultaModelo modelo_novo)
+	{
+		ConsultaModelo modelo_antigo = new ConsultaModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write( stream);
+						return;
+					}
+							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
+    public void eliminarDados(ConsultaModelo modelo_novo)
+	{
+		ConsultaModelo modelo_antigo = new ConsultaModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados eliminados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write(stream);
+						return;
+					}							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
     public static void listarConsultas()
     {
         ConsultaFile file = new ConsultaFile();
@@ -53,9 +124,11 @@ public class ConsultaFile extends ObjectsFile
             for(int i = 0; i < file.getNregistos(); i++)
             {
                 modelo.read(file.stream);
-
-                dados += "==============================\n";
-                dados += modelo.toString() + "\n\n";
+                if(modelo.getStatus() == true)
+                {    
+                    dados += "==============================\n";
+                    dados += modelo.toString() + "\n\n";
+                }
             }
 
             JTextArea area = new JTextArea(40 , 60);
@@ -85,7 +158,7 @@ public class ConsultaFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return 0;
@@ -116,7 +189,7 @@ public class ConsultaFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getMedico().equalsIgnoreCase(medicoProcurado))
+                if(modelo.getMedico().equalsIgnoreCase(medicoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -150,7 +223,7 @@ public class ConsultaFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -182,7 +255,7 @@ public class ConsultaFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getMedico().equalsIgnoreCase(medicoProcurado))
+                if(modelo.getMedico().equalsIgnoreCase(medicoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
