@@ -19,7 +19,8 @@ public class PagamentoModelo implements RegistGeneric
     private float valor;
     private StringBufferModelo descricao, metodoPagamento;
     private DataModelo dataPagamento;
- 
+    private boolean status;
+
     public PagamentoModelo()
     {
         id = 0;
@@ -27,15 +28,18 @@ public class PagamentoModelo implements RegistGeneric
         valor = 0;
         dataPagamento = new DataModelo();
         metodoPagamento = new StringBufferModelo("", 20);
+        status = false;
     }
 
-    public PagamentoModelo(int id, String descricao, float valor, String dataPagamento, String metodoPagamento)
+    public PagamentoModelo(int id, String descricao, float valor, String dataPagamento, String metodoPagamento, 
+    boolean status)
     {
         this.id = id;
         this.descricao = new StringBufferModelo(descricao, 20);
         this.valor = valor;
         this.dataPagamento = new DataModelo(dataPagamento);
         this.metodoPagamento = new StringBufferModelo(metodoPagamento, 20);
+        this.status = status;
     }
 
     // metodos getters
@@ -62,6 +66,11 @@ public class PagamentoModelo implements RegistGeneric
     public String getMetodoPagamento()
     {
         return metodoPagamento.toStringEliminatingSpaces();
+    }
+
+    public boolean getStatus()
+    {
+        return status;
     }
     
     // metodos setters
@@ -90,6 +99,11 @@ public class PagamentoModelo implements RegistGeneric
         this.metodoPagamento = new StringBufferModelo(metodoPagamento, 20);
     }
 
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
+
     // metodo toString
     public String toString()
     {
@@ -100,6 +114,7 @@ public class PagamentoModelo implements RegistGeneric
         dados += "Valor: " + getValor() + "\n";
         dados += "Data Pagamento: " + getDataPagamento() + "\n";
         dados += "Metodo Pagamento: " + getMetodoPagamento() + "\n";
+        dados += "Estado: " + getStatus() + "\n";
 
         return dados;
     }
@@ -109,7 +124,7 @@ public class PagamentoModelo implements RegistGeneric
     {
         try
         {
-            return 40 * 2 + 4 + 12 + 4;
+            return 40 * 2 + 4 + 12 + 4 + 1;
         }
         catch(Exception ex)
         {
@@ -127,7 +142,7 @@ public class PagamentoModelo implements RegistGeneric
             stream.writeFloat(valor);            
             dataPagamento.write(stream);
             metodoPagamento.write(stream);
-            
+            stream.writeBoolean(status);
         }
         catch(IOException ex)
         {
@@ -146,6 +161,7 @@ public class PagamentoModelo implements RegistGeneric
             valor = stream.readFloat();
             dataPagamento.read(stream);
             metodoPagamento.read(stream);
+            status = stream.readBoolean();
         }
         catch(IOException ex)
         {

@@ -177,10 +177,27 @@ public class PagamentoVisao extends JFrame
             getDescricao(),
             getValor(),
             getDataPagamento(),
-            getMetodoPagamento());
+            getMetodoPagamento(),
+            true);
 
             JOptionPane.showMessageDialog(null, modelo.toString());
             modelo.salvar();
+            dispose();
+        }
+
+        // alterar
+        public void alterar()
+        {
+            PagamentoModelo modelo = new PagamentoModelo(
+            getId(),
+            getDescricao(),
+            getValor(),
+            getDataPagamento(),
+            getMetodoPagamento(),
+            true);
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
+            modelo.salvarDados();
             dispose();
         }
     }
@@ -209,7 +226,12 @@ public class PagamentoVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                centro.salvar();
+            {
+                if(editar)
+                    centro.alterar();
+                else    
+                    centro.salvar();
+            }
             else
                 dispose();
         }

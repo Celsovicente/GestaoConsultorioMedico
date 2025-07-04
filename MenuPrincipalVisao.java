@@ -216,6 +216,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             new EliminarConsulta();
         else if(event.getSource() == eliminarHistoricoItem)
             new EliminarHistorico();
+        else if(event.getSource() == eliminarPagamentoItem)
+            new EliminarPagamento();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)
