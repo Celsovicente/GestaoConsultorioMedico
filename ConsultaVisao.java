@@ -192,7 +192,6 @@ public class ConsultaVisao extends JFrame
             observacoesJTA.setText(observacoes);
         }
 
-
         // metodo salvar
         public void salvar()
         {

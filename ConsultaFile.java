@@ -163,6 +163,12 @@ public class ConsultaFile extends ObjectsFile
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return 0;
                 }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                    return 0;      
+                }
             }
                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
@@ -198,6 +204,7 @@ public class ConsultaFile extends ObjectsFile
                 {
                     JOptionPane.showMessageDialog(null, "Erro, medico nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
             }
         }
@@ -273,5 +280,4 @@ public class ConsultaFile extends ObjectsFile
         }
         return modelo;
     }
-
 }

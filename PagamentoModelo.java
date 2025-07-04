@@ -127,6 +127,7 @@ public class PagamentoModelo implements RegistGeneric
             stream.writeFloat(valor);            
             dataPagamento.write(stream);
             metodoPagamento.write(stream);
+            
         }
         catch(IOException ex)
         {
@@ -157,5 +158,11 @@ public class PagamentoModelo implements RegistGeneric
     {
         PagamentoFile file = new PagamentoFile();
         file.salvarDados(this);
+    }
+
+    public void salvarDados()
+    {
+        PagamentoFile file = new PagamentoFile();
+        file.alterarDados(this);
     }
 }

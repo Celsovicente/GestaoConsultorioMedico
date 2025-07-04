@@ -124,6 +124,7 @@ public class EliminarConsulta extends JFrame
 						modelo.setStatus(false);
 						
 						new ConsultaFile().eliminarDados( modelo );
+                        dispose();
 					}
 					else
 						JOptionPane.showMessageDialog(null, "Operacao Interrompida por ordem do operador!");
@@ -137,9 +138,9 @@ public class EliminarConsulta extends JFrame
 					if (opcao == JOptionPane.YES_OPTION)
 					{
 						//eliminar dados
-						modelo.setStatus(false);
-						
+						modelo.setStatus(false);						
 						new ConsultaFile().eliminarDados( modelo );
+                        dispose();
 					}
 					else
 						JOptionPane.showMessageDialog(null, "Operacao Interrompida por ordem do operador!");

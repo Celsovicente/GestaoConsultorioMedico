@@ -40,6 +40,77 @@ public class PagamentoFile extends ObjectsFile
         }
     }
 
+    public void alterarDados(PagamentoModelo modelo_novo)
+	{
+		PagamentoModelo modelo_antigo = new PagamentoModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write( stream);
+						return;
+					}
+							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
+    public void eliminarDados(PagamentoModelo modelo_novo)
+	{
+		PagamentoModelo modelo_antigo = new PagamentoModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados eliminados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write(stream);
+						return;
+					}							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
     public static void listarPagamentos()
     {
         PagamentoFile file = new PagamentoFile();

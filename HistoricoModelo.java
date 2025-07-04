@@ -18,6 +18,7 @@ public class HistoricoModelo implements RegistGeneric
     private int id;
     private StringBufferModelo diagnostico,tratamento, medicoResponsavel;
     private DataModelo dataRegistro;
+    private boolean status;
  
     public HistoricoModelo()
     {
@@ -26,15 +27,18 @@ public class HistoricoModelo implements RegistGeneric
         tratamento = new StringBufferModelo("", 40);
         medicoResponsavel = new StringBufferModelo("", 20);
         dataRegistro = new DataModelo();
+        status = false;
     }
 
-    public HistoricoModelo(int id, String diagnostico, String tratamento, String medicoResponsavel, String dataRegistro)
+    public HistoricoModelo(int id, String diagnostico, String tratamento, String medicoResponsavel, String dataRegistro,
+    boolean status)
     {
         this.id = id;
         this.diagnostico = new StringBufferModelo(diagnostico, 50);
         this.tratamento = new StringBufferModelo(tratamento, 40);
         this.medicoResponsavel = new StringBufferModelo(medicoResponsavel, 20);
         this.dataRegistro = new DataModelo(dataRegistro);
+        this.status = status;
     }
 
     // metodos getters
@@ -63,6 +67,10 @@ public class HistoricoModelo implements RegistGeneric
         return dataRegistro.toString();
     }
 
+    public boolean getStatus()
+    {
+        return status;
+    }
     // metodos setters
     public void setId(int id)
     {
@@ -89,6 +97,11 @@ public class HistoricoModelo implements RegistGeneric
         this.dataRegistro = new DataModelo(dataRegistro);
     }
 
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
+
     // metodo toString
     public String toString()
     {
@@ -99,6 +112,7 @@ public class HistoricoModelo implements RegistGeneric
         dados += "Tratamento: " + getTratamento() + "\n";
         dados += "Medico Reponsavel: " + getMedicoResponsavel() + "\n";
         dados += "Data de Registro: " + getDataRegistro() + "\n";
+        dados += "Estado: " + getStatus() + "\n";
 
         return dados;
     }
@@ -108,7 +122,7 @@ public class HistoricoModelo implements RegistGeneric
     {
         try
         {
-            return 110 * 2 + 12 + 4;
+            return 110 * 2 + 12 + 4 + 1;
         }
         catch(Exception ex)
         {
@@ -126,6 +140,7 @@ public class HistoricoModelo implements RegistGeneric
             tratamento.write(stream);
             medicoResponsavel.write(stream);
             dataRegistro.write(stream);
+            stream.writeBoolean(status);
         }
         catch(IOException ex)
         {
@@ -144,6 +159,7 @@ public class HistoricoModelo implements RegistGeneric
             tratamento.read(stream);
             medicoResponsavel.read(stream);
             dataRegistro.read(stream);
+            status = stream.readBoolean();
         }
         catch(IOException ex)
         {
@@ -156,5 +172,12 @@ public class HistoricoModelo implements RegistGeneric
     {
         HistoricoFile file = new HistoricoFile();
         file.salvarDados(this);
+    }
+
+    
+    public void salvarDados()
+    {
+        HistoricoFile file = new HistoricoFile();
+        file.alterarDados(this);
     }
 }
