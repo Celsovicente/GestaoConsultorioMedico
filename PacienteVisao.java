@@ -298,7 +298,8 @@ public class PacienteVisao extends JFrame
             getMunicipio() ,
             getComuna(), 
             getTelefone(),
-            getEmail());
+            getEmail(),
+            true);
 
             JOptionPane.showMessageDialog(null, modelo.toString());
             
@@ -306,6 +307,28 @@ public class PacienteVisao extends JFrame
             dispose();
         }
 
+        // metodo alterar
+        public void alterar()
+        {
+            PacienteModelo modelo = new PacienteModelo(
+            getId() ,
+            getNome() ,
+            getDataNascimento() ,
+            getNumeroDocumento(), 
+            getGenero(), 
+            getNacionalidade() , 
+            getProvincia() , 
+            getMunicipio() ,
+            getComuna(), 
+            getTelefone(),
+            getEmail(),
+            true);
+
+            JOptionPane.showMessageDialog(null, modelo.toString());
+            
+            modelo.salvarDados();
+            dispose();
+        }
     }
 
     class PainelSul extends JPanel implements ActionListener
@@ -332,7 +355,12 @@ public class PacienteVisao extends JFrame
         public void actionPerformed(ActionEvent event)
         {
             if(event.getSource() == salvarJBT)
-                centro.salvar();
+            {
+                if(editar)
+                    centro.alterar();
+                else
+                    centro.salvar();
+            }
             else
                 dispose();
         }

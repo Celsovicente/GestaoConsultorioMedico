@@ -125,8 +125,11 @@ public class PagamentoFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                dados += "==============================\n";
-                dados += modelo.toString() + "\n\n";
+                if(modelo.getStatus() == true)
+                {
+                    dados += "==============================\n";
+                    dados += modelo.toString() + "\n\n";
+                }
             }
 
             JTextArea area = new JTextArea(40 , 60);
@@ -156,7 +159,7 @@ public class PagamentoFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return 0;
@@ -187,7 +190,7 @@ public class PagamentoFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada))
+                if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -220,7 +223,7 @@ public class PagamentoFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -251,7 +254,7 @@ public class PagamentoFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada))
+                if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;

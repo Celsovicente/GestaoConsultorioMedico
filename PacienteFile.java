@@ -40,6 +40,77 @@ public class PacienteFile extends ObjectsFile
         }
     }
 
+    public void alterarDados(PacienteModelo modelo_novo)
+	{
+		PacienteModelo modelo_antigo = new PacienteModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write( stream);
+						return;
+					}
+							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
+    public void eliminarDados(PacienteModelo modelo_novo)
+	{
+		PacienteModelo modelo_antigo = new PacienteModelo();
+		
+		try
+		{
+			stream.seek(4);
+			
+			for(int i = 0; i < getNregistos(); ++i)
+			{
+				modelo_antigo.read( stream );
+				
+				if (i == 0 && modelo_antigo.getId() == modelo_novo.getId())
+				{
+					stream.seek(4); 
+					modelo_novo.write( stream );
+					JOptionPane.showMessageDialog(null, "Dados eliminados com sucesso!");
+					return;
+				}	
+				else
+				{
+					if (modelo_antigo.getId() + 1 == modelo_novo.getId())
+					{
+						modelo_novo.write(stream);
+						return;
+					}							
+				}			
+			}			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
     public static void listarPacientes()
     {
         PacienteFile file = new PacienteFile();
@@ -54,8 +125,11 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                dados += "==============================\n";
-                dados += modelo.toString() + "\n\n";
+                if(modelo.getStatus() == true)
+                {    
+                    dados += "==============================\n";
+                    dados += modelo.toString() + "\n\n";
+                }
             }
 
             JTextArea area = new JTextArea(40 , 60);
@@ -86,7 +160,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNome().equalsIgnoreCase(nomeProcurado))
+                if(modelo.getNome().equalsIgnoreCase(nomeProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                 }
@@ -113,7 +187,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                //if(modelo.getStatus() == true)
+                if(modelo.getStatus() == true)
                     vetor.add(modelo.getNome());
             }
             
@@ -141,7 +215,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado))
+                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -174,7 +248,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return 0;
@@ -205,7 +279,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado))
+                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -239,7 +313,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getGenero().equalsIgnoreCase(generoProcurado))
+                if(modelo.getGenero().equalsIgnoreCase(generoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -273,7 +347,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada))
+                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return;
@@ -307,7 +381,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getId() == idProcurado)
+                if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -339,7 +413,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNome().equalsIgnoreCase(nomeProcurado))
+                if(modelo.getNome().equalsIgnoreCase(nomeProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -374,7 +448,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado))
+                if(modelo.getNumeroDocumento().equalsIgnoreCase(numeroDocumentoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -409,7 +483,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado))
+                if(modelo.getTelefone().equalsIgnoreCase(telefoneProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -444,7 +518,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getGenero().equalsIgnoreCase(generoProcurado))
+                if(modelo.getGenero().equalsIgnoreCase(generoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
@@ -480,7 +554,7 @@ public class PacienteFile extends ObjectsFile
             {
                 modelo.read(file.stream);
 
-                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada))
+                if(modelo.getNacionalidade().equalsIgnoreCase(nacionalidadeProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;

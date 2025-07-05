@@ -138,7 +138,7 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         //adicionando evento de click
         novoPacienteItem.addActionListener(this);
         editarPacienteItem.addActionListener(this);
-        eliminarConsultaItem.addActionListener(this);
+        eliminarPacienteItem.addActionListener(this);
         listarPacientesItem.addActionListener(this);
         pesquisarPacientesItem.addActionListener(this);
         sairPacienteItem.addActionListener(this);
@@ -218,6 +218,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             new EliminarHistorico();
         else if(event.getSource() == eliminarPagamentoItem)
             new EliminarPagamento();
+        else if(event.getSource() == eliminarPacienteItem)
+            new EliminarPacientes();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)

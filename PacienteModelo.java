@@ -19,6 +19,7 @@ public class PacienteModelo implements RegistGeneric
     private StringBufferModelo nome, numeroDocumento, genero, nacionalidade, provincia, municipio, 
     comuna, telefone, email; 
     private DataModelo dataNascimento;
+    private boolean status;
 
     public PacienteModelo()
     {
@@ -33,10 +34,12 @@ public class PacienteModelo implements RegistGeneric
         comuna = new StringBufferModelo("", 20);
         telefone = new StringBufferModelo("", 20);
         email = new StringBufferModelo("", 30);
+        status = false;
     }
 
     public PacienteModelo(int id, String nome, String dataNascimento, String numeroDocumento, String genero, 
-    String nacionalidade, String provincia, String municipio, String comuna, String telefone, String email)
+    String nacionalidade, String provincia, String municipio, String comuna, String telefone, String email,
+    boolean status)
     {
         this.id = id;
         this.nome = new StringBufferModelo(nome, 50);
@@ -49,6 +52,7 @@ public class PacienteModelo implements RegistGeneric
         this.comuna = new StringBufferModelo(comuna , 20);
         this.telefone = new StringBufferModelo(telefone , 20);
         this.email = new StringBufferModelo(email , 30);
+        this.status = status;
     }
 
     // metodos getters
@@ -106,6 +110,11 @@ public class PacienteModelo implements RegistGeneric
     {
         return email.toStringEliminatingSpaces();
     }
+
+    public boolean getStatus()
+    {
+        return status;
+    }
    
    // metodos setters
     public void setId(int id)
@@ -162,6 +171,11 @@ public class PacienteModelo implements RegistGeneric
     {
         this.email = new StringBufferModelo(email , 30);
     }
+
+    public void setStatus(boolean status)
+    {
+        this.status = status;
+    }
         
     // metodo toString
     public String toString()
@@ -179,6 +193,7 @@ public class PacienteModelo implements RegistGeneric
         dados += "Comuna: " + getComuna() + "\n";
         dados += "Telefone: " + getTelefone() + "\n";
         dados += "Email: " + getEmail() + "\n";
+        dados += "Estado: " + getStatus() + "\n";
 
         return dados;
     }
@@ -188,7 +203,7 @@ public class PacienteModelo implements RegistGeneric
     {
         try
         {
-            return 220 * 2 + 4 + 12;
+            return 220 * 2 + 4 + 12 + 1;
         }
         catch(Exception ex)
         {
@@ -212,6 +227,7 @@ public class PacienteModelo implements RegistGeneric
             comuna.write(stream);
             telefone.write(stream);
             email.write(stream);
+            stream.writeBoolean(status);
         }
         catch(IOException ex)
         {
@@ -236,6 +252,7 @@ public class PacienteModelo implements RegistGeneric
             comuna.read(stream);
             telefone.read(stream);
             email.read(stream);
+            status = stream.readBoolean();
         }
         catch(IOException ex)
         {
@@ -248,5 +265,11 @@ public class PacienteModelo implements RegistGeneric
     {
         PacienteFile file = new PacienteFile();
         file.salvarDados(this);
+    }
+
+    public void salvarDados()
+    {
+        PacienteFile file = new PacienteFile();
+        file.alterarDados(this);
     }
 }

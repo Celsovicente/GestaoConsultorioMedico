@@ -45,14 +45,14 @@ public class ApresentacaoVisao extends JFrame
                 
                 add(new JScrollPane(areaPrincipal = new JTextArea(80 , 60)));
                 areaPrincipal.setFocusable(false);
-                areaPrincipal.setText("Bem Vindo ao Sistema de Gestao do Centro de Formacao Profissional.\n" +
-                "\tTema: Gestao de Centro de Formacao Profissional\n" +
-                "Este projecto tem o objectivo de registar a inscricao de alunos no centro de formacao, e \n" +
-                "realizar os pagamentos dentro de um centro de formacaoo profissional" +
+                areaPrincipal.setText("Bem Vindo ao Sistema de Gestao do Consultorio Medico.\n" +
+                "\tTema: Gestao de Consultorio Medico\n" +
+                "Este projecto tem o objectivo de geerir informacoes  relacionadas ao atendimento clinico de pacientes\n" +
+                "permitindo o cadastro de pacientes, marcacao de consultas, controle de pagamentos e o historico do paciente." +
                 "Este projeto foi desenvolvido no ambito da cadeira de Fundamentos de Programacao 2,\n" +
                 "no Curso de Engenharia Informatica na UCAN. E de uso exclusivo aos Recursos Humanos.\n" +
-                "Este projeto foi desenvolvido para Facilitar o Controlo e Gestao da Inscricao ao centro de\n" +
-                "formacao, permitindo localizar os dados de forma concisa e segura.\n" +
+                "Este projeto foi desenvolvido para Facilitar o Controlo e Gestao da inofrmacao sobre os pacientes do consultorio\n" +
+                "medico, permitindo localizar os dados de forma concisa e segura.\n" +
                 "Este projeto foi desenvolvido por Celso Segunda Vicente Estudante do I ano id: 33019.\n" +
                 "Se concorda com os termos e condicoes clique em Concordar para Continuar");
 
