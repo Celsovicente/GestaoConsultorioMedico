@@ -103,5 +103,5 @@ Pesquisa por Historico
 
 7. Diversos
 7.1 - Implementação: Java Swing
-7.2 - IDE:VS Code
+7.2 - IDE:VS NotePad++
 */
