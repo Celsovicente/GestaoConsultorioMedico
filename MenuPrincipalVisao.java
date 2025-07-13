@@ -24,8 +24,8 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
     private JMenuItem novoPagamentoItem, editarPagamentoItem, eliminarPagamentoItem, sairPagamentoItem;
     private JMenuItem novoHistoricoItem, editarHistoricoItem, eliminarHistoricoItem, sairHistoricoItem;
     private JMenuItem nacionalidadeItem, municipioItem,  comunaItem, provinciaItem, metodoPagamentoItem, 
-    especialidadeItem, horariosDisponiveisItem, medicoItem, medicoResponsavelItem, paroquiaItem, 
-    diocesseItem, centroItem;
+    especialidadeItem, horariosDisponiveisItem, medicoItem, medicoResponsavelItem, conferenciaItem, paroquiaItem, 
+    diocesseItem;
     private JMenuItem listarPacientesItem, listarPagamentosItem, listarConsultasItem, listarHistoricoItem,
     listarDefesaItem;
     private JMenuItem novaDefesaItem,pesquisarPacientesItem, pesquisarPagamentosItem, pesquisarHistoricoItem, 
@@ -118,10 +118,11 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuListagem.addSeparator();
         menuListagem.add(listarPagamentosItem = new JMenuItem("Listar Pagamentos"));
         menuListagem.add(pesquisarPagamentosItem = new JMenuItem("Pesquisar Pagamento"));
+        menuListagem.addSeparator();
+        menuListagem.add(listarDefesaItem = new JMenuItem("Listar Defesas"));
         
         // instanciando o menu defesa
         menuDefesa.add(novaDefesaItem = new JMenuItem("Cadastrar Defesa"));
-        menuDefesa.add(listarDefesaItem = new JMenuItem("Listar Defesas"));
         menuDefesa.add(pesquisarDefesaItem = new JMenuItem("Pesquisar Defesa"));
 
         // instancindo os elementos do menuTabela
@@ -134,6 +135,9 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         menuTabelas.add(medicoItem = new JMenuItem("Medicos"));
         menuTabelas.add(horariosDisponiveisItem = new JMenuItem("Horarios Disponiveis"));
         menuTabelas.add(medicoResponsavelItem = new JMenuItem("Medico Reesponsavel"));   
+        menuTabelas.add(conferenciaItem = new JMenuItem("Conferencia"));
+        menuTabelas.add(diocesseItem = new JMenuItem("Diocese"));
+        menuTabelas.add(paroquiaItem = new JMenuItem("Paroquia"));
 
         //adicionando evento de click
         novoPacienteItem.addActionListener(this);
@@ -164,8 +168,12 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
         pesquisarPagamentosItem.addActionListener(this);
         sairPagamentoItem.addActionListener(this);
 
+        novaDefesaItem.addActionListener(this);
         listarDefesaItem.addActionListener(this);
         pesquisarDefesaItem.addActionListener(this);
+        conferenciaItem.addActionListener(this);
+        diocesseItem.addActionListener(this);
+        paroquiaItem.addActionListener(this);
 
         nacionalidadeItem.addActionListener(this);
         provinciaItem.addActionListener(this);
@@ -218,8 +226,14 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             new EliminarHistorico();
         else if(event.getSource() == eliminarPagamentoItem)
             new EliminarPagamento();
+        else if(event.getSource() == pesquisarDefesaItem)
+            new PesquisarDefesa();
         else if(event.getSource() == eliminarPacienteItem)
             new EliminarPacientes();
+        else if(event.getSource() == novaDefesaItem)
+            new DefesaVisao();
+        else if(event.getSource() == listarDefesaItem)
+            DefesaFile.listarDefesa();
         else if(event.getSource() == nacionalidadeItem)
             Tabela2.editarNovosItems("Nacionalidades.tab", "Nova Nacionalidade");
         else if(event.getSource() == metodoPagamentoItem)
@@ -230,6 +244,13 @@ public class MenuPrincipalVisao extends JFrame implements ActionListener
             Tabela2.editarNovosItems("MedicoResponsavel.tab", "Novo Medico Responsavel");
         else if(event.getSource() == provinciaItem)
             Tabela2.editarNovosItems("Provincias.tab", "Nova Provincia");
+        else if(event.getSource() == conferenciaItem)
+            Tabela2.editarNovosItems("Conferencias.tab", "Nova Conferencia");
+        else if(event.getSource() == diocesseItem)
+            Tabela3_2.editarNovosItems("Conferencias.tab", "Dioceses.tab", "Conferencia", "Diocese", "Nova Diocese");
+        else if(event.getSource() == paroquiaItem)
+            Tabela3_3.editarNovosItems("Conferencias.tab", "Dioceses.tab","Paroquias.tab", 
+            "Conferencia", "Diocese", "Paroquia", "Nova Paroquia");
         else if(event.getSource() == municipioItem)
             Tabela3_2.editarNovosItems("Provincias.tab", "Municipios.tab", "Provincia", "Municipio", 
             "Novo Municipio");
