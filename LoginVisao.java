@@ -23,9 +23,16 @@ public class LoginVisao extends JFrame
         super("Tela de Login");
 
         JPanel painelNorte = new JPanel();
-        JLabel lbImagem = new JLabel(new ImageIcon("image/descarregar.jpg"));
+
+        ImageIcon iconOriginal = new ImageIcon("image/logo.png");
+        Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+
+        JLabel lbImagem = new JLabel(iconRedimensionado);
+
         painelNorte.add(lbImagem);
-        getContentPane().add(painelNorte , BorderLayout.NORTH);
+        getContentPane().add(painelNorte, BorderLayout.NORTH);
+
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
         

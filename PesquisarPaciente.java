@@ -184,7 +184,7 @@ public class PesquisarPaciente extends JFrame
             }
             else if(event.getSource() == pesquisarPorNacionalidade)
             {
-                    nomesJCB.setEnabled(false);
+                nomesJCB.setEnabled(false);
                 numeroDocumentoJTF.setEnabled(false);
                 idJTF.setEnabled(false);
                 telefoneJTF.setEnabled(false);

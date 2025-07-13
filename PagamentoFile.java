@@ -115,7 +115,12 @@ public class PagamentoFile extends ObjectsFile
     {
         PagamentoFile file = new PagamentoFile();
         PagamentoModelo modelo = new PagamentoModelo();
-        String dados = "Listagem dos Dados do Pagamento:\n\n";
+        
+        // Cabeçalhos da tabela
+        String[] colunas = {"Id", "Descricao", "Valor", "Data", "Metodo"};
+
+        // lista para aramazenar temporariamente os dados
+        java.util.List<Object[]>linhas = new java.util.ArrayList<>();
 
         try
         {
@@ -127,19 +132,34 @@ public class PagamentoFile extends ObjectsFile
 
                 if(modelo.getStatus() == true)
                 {
-                    dados += "==============================\n";
-                    dados += modelo.toString() + "\n\n";
+                    Object[] linha = 
+                    {
+                        modelo.getId(),
+                        modelo.getDescricao(),
+                        modelo.getValor(),
+                        modelo.getDataPagamento(),
+                        modelo.getMetodoPagamento()
+                    };
+                    linhas.add(linha);
                 }
             }
 
-            JTextArea area = new JTextArea(40 , 60);
-            area.setText(dados);
-            area.setFocusable(false);
-            JOptionPane.showMessageDialog(null, new JScrollPane(area),
-            "Gestao de Consultorio Medico", JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(IOException ex)
-        {
+            // Converter lista para array de objetos para JTable
+            Object[][] dados = new Object[linhas.size()][colunas.length];
+            
+            for(int i = 0; i < linhas.size(); i++)
+            {
+                dados[i] = linhas.get(i);
+            }
+
+             JTable tabela = new JTable(dados, colunas);
+            JScrollPane scroll = new JScrollPane(tabela);
+            tabela.setFillsViewportHeight(true);
+
+            JOptionPane.showMessageDialog(null, scroll,
+                "Gestao de Consultorio Medico", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
