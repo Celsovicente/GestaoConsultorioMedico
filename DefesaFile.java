@@ -132,6 +132,87 @@ public class DefesaFile extends ObjectsFile
             ex.printStackTrace();
         }
     }
+    
+    public static StringVector getAllConferencias()
+    {
+        DefesaFile file = new DefesaFile();
+        DefesaModelo modelo = new DefesaModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getConferencia());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+    public static StringVector getAllDioceses()
+    {
+        DefesaFile file = new DefesaFile();
+        DefesaModelo modelo = new DefesaModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getDiocese());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+    public static StringVector getAllParoquias()
+    {
+        DefesaFile file = new DefesaFile();
+        DefesaModelo modelo = new DefesaModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getParoquia());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
 
     public static void pesquisarPorConferencia(String conferenciaProcurada)
     {

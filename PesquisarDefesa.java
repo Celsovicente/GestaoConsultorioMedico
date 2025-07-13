@@ -53,15 +53,15 @@ public class PesquisarDefesa extends JFrame
             grupo.add(pesquisarData);
             
             add(new JLabel("Escolha a Conferencia Procurada"));
-            add(conferenciaJCB = new JComboBox());
+            add(conferenciaJCB = new JComboBox(DefesaFile.getAllConferencias()));
             conferenciaJCB.setEnabled(false);
             
             add(new JLabel("Escolha a Diocese Procurada"));
-            add(dioceseJCB = new JComboBox());
+            add(dioceseJCB = new JComboBox(DefesaFile.getAllDioceses()));
             dioceseJCB.setEnabled(false);
 
             add(new JLabel("Escolha Paroquia Procurada"));
-            add(paroquiaJCB = new JComboBox());
+            add(paroquiaJCB = new JComboBox(DefesaFile.getAllParoquias()));
             paroquiaJCB.setEnabled(false);
 
             add(new JLabel("Digite a Data Procurada"));
