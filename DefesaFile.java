@@ -76,29 +76,26 @@ public class DefesaFile extends ObjectsFile
 		}
 	}
 
-    public static void listarDefesa()
+    public static void listarDefesa() 
     {
         DefesaFile file = new DefesaFile();
         DefesaModelo modelo = new DefesaModelo();
-        
-        // Cabeçalhos da tabela
-        String[] colunas = {"Id", "Descricao", "Valor", "Data", "Metodo", "Conferencia", "Diocese", "Paroquia", "Data Fundacao"};
 
-        // lista para aramazenar temporariamente os dados
-        java.util.List<Object[]>linhas = new java.util.ArrayList<>();
+        String[] colunas = {
+            "Id", "Descricao", "Valor", "Data", "Metodo",
+            "Conferencia", "Diocese", "Paroquia", "Data Fundacao"
+        };
 
-        try
-        {
+        java.util.List<Object[]> linhas = new java.util.ArrayList<>();
+
+        try {
             file.stream.seek(4);
 
-            for(int i = 0; i < file.getNregistos(); i++)
-            {
+            for (int i = 0; i < file.getNregistos(); i++) {
                 modelo.read(file.stream);
 
-                if(modelo.getStatus() == true)
-                {
-                    Object[] linha = 
-                    {
+                if (modelo.getStatus()) {
+                    Object[] linha = {
                         modelo.getId(),
                         modelo.getDescricao(),
                         modelo.getValor(),
@@ -113,26 +110,32 @@ public class DefesaFile extends ObjectsFile
                 }
             }
 
-            // Converter lista para array de objetos para JTable
             Object[][] dados = new Object[linhas.size()][colunas.length];
-            
-            for(int i = 0; i < linhas.size(); i++)
+            for (int i = 0; i < linhas.size(); i++) 
             {
                 dados[i] = linhas.get(i);
             }
 
-             JTable tabela = new JTable(dados, colunas);
-            JScrollPane scroll = new JScrollPane(tabela);
+            JTable tabela = new JTable(dados, colunas);
             tabela.setFillsViewportHeight(true);
+            tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-            JOptionPane.showMessageDialog(null, scroll,
-                "Gestao de Consultorio Medico", JOptionPane.INFORMATION_MESSAGE);
+            JScrollPane scroll = new JScrollPane(tabela);
+
+            JDialog dialogo = new JDialog();
+            dialogo.setTitle("Gestao de Consultorio Medico - Lista de Defesas");
+            dialogo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialogo.setLayout(new BorderLayout());
+            dialogo.add(scroll, BorderLayout.CENTER);
+            dialogo.setSize(800, 600); // ou usar setExtendedState para tela cheia
+            dialogo.setLocationRelativeTo(null); // centraliza
+            dialogo.setVisible(true);
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public static StringVector getAllConferencias()
     {
         DefesaFile file = new DefesaFile();
