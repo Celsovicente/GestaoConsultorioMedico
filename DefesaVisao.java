@@ -28,7 +28,7 @@ public class DefesaVisao extends JFrame
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
 
-        setSize(600, 450);
+        setSize(400, 350);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -186,44 +186,71 @@ public class DefesaVisao extends JFrame
             txtData2.getDTestField().setText(data);
         }
 
+        // método para validar os campos
+        public boolean validarDados() 
+        {
+            if (getDescricao().isEmpty() || getDataPagamento().isEmpty() || getMetodoPagamento().isEmpty()
+                || getConferencia().isEmpty() || getDiocese().isEmpty() || getParoquia().isEmpty()
+                || getDataFundacao().isEmpty()) 
+            {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            if (getValor() <= 0) 
+            {
+                JOptionPane.showMessageDialog(null, "O valor deve ser maior que zero.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        }
+
         // metodo salvar
         public void salvar()
         {
-            DefesaModelo modelo = new DefesaModelo(
-            getId(),
-            getDescricao(),
-            getValor(),
-            getDataPagamento(),
-            getMetodoPagamento(),
-            getConferencia(),
-            getDiocese(),
-            getParoquia(),
-            getDataFundacao(),
-            true);
+            if(validarDados())
+            {
+                DefesaModelo modelo = new DefesaModelo(
+                getId(),
+                getDescricao(),
+                getValor(),
+                getDataPagamento(),
+                getMetodoPagamento(),
+                getConferencia(),
+                getDiocese(),
+                getParoquia(),
+                getDataFundacao(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvar();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvar();
+                dispose();
+            }
         }
 
         // alterar
         public void alterar()
         {
-            DefesaModelo modelo = new DefesaModelo(
-            getId(),
-            getDescricao(),
-            getValor(),
-            getDataPagamento(),
-            getMetodoPagamento(),
-            getConferencia(),
-            getDiocese(),
-            getParoquia(),
-            getDataFundacao(),
-            true);
+            if(validarDados())
+            {
+                DefesaModelo modelo = new DefesaModelo(
+                getId(),
+                getDescricao(),
+                getValor(),
+                getDataPagamento(),
+                getMetodoPagamento(),
+                getConferencia(),
+                getDiocese(),
+                getParoquia(),
+                getDataFundacao(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvarDados();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvarDados();
+                dispose();
+            }
         }
     }
 

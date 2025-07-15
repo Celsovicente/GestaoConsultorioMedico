@@ -284,50 +284,75 @@ public class PacienteVisao extends JFrame
             emailJTF.setText(email);
         }
 
+        // metodo para validar os campos
+        public boolean validarDados()
+        {
+            if (getNome().isEmpty() || getDataNascimento().isEmpty() || getNumeroDocumento().isEmpty() 
+            || getGenero().isEmpty() || getNacionalidade().isEmpty() || getProvincia().isEmpty() || 
+            getMunicipio().isEmpty() || getComuna().isEmpty() || getTelefone().isEmpty() || getEmail().isEmpty()) 
+            {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", 
+                "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            if (!getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) 
+            {
+                JOptionPane.showMessageDialog(null, "Email inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        } 
+
         // metodo salvar
         public void salvar()
         {
-            PacienteModelo modelo = new PacienteModelo(
-            getId() ,
-            getNome() ,
-            getDataNascimento() ,
-            getNumeroDocumento(), 
-            getGenero(), 
-            getNacionalidade() , 
-            getProvincia() , 
-            getMunicipio() ,
-            getComuna(), 
-            getTelefone(),
-            getEmail(),
-            true);
+            if(validarDados())
+            {
+                PacienteModelo modelo = new PacienteModelo(
+                getId() ,
+                getNome() ,
+                getDataNascimento() ,
+                getNumeroDocumento(), 
+                getGenero(), 
+                getNacionalidade() , 
+                getProvincia() , 
+                getMunicipio() ,
+                getComuna(), 
+                getTelefone(),
+                getEmail(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            
-            modelo.salvar();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                
+                modelo.salvar();
+                dispose();
+            }
         }
 
         // metodo alterar
         public void alterar()
         {
-            PacienteModelo modelo = new PacienteModelo(
-            getId() ,
-            getNome() ,
-            getDataNascimento() ,
-            getNumeroDocumento(), 
-            getGenero(), 
-            getNacionalidade() , 
-            getProvincia() , 
-            getMunicipio() ,
-            getComuna(), 
-            getTelefone(),
-            getEmail(),
-            true);
+            if(validarDados())
+            {
+                PacienteModelo modelo = new PacienteModelo(
+                getId() ,
+                getNome() ,
+                getDataNascimento() ,
+                getNumeroDocumento(), 
+                getGenero(), 
+                getNacionalidade() , 
+                getProvincia() , 
+                getMunicipio() ,
+                getComuna(), 
+                getTelefone(),
+                getEmail(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            
-            modelo.salvarDados();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                
+                modelo.salvarDados();
+                dispose();
+            }
         }
     }
 

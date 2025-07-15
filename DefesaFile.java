@@ -81,9 +81,10 @@ public class DefesaFile extends ObjectsFile
         DefesaFile file = new DefesaFile();
         DefesaModelo modelo = new DefesaModelo();
 
-        String[] colunas = {
-            "Id", "Descricao", "Valor", "Data", "Metodo",
-            "Conferencia", "Diocese", "Paroquia", "Data Fundacao"
+        String[] colunas = 
+        {
+            "Id", "Descricao", "Valor", "Data", "Metodo de Pagamento","Conferencia", "Diocese", 
+            "Paroquia", "Data Fundacao"
         };
 
         java.util.List<Object[]> linhas = new java.util.ArrayList<>();
@@ -91,7 +92,8 @@ public class DefesaFile extends ObjectsFile
         try {
             file.stream.seek(4);
 
-            for (int i = 0; i < file.getNregistos(); i++) {
+            for (int i = 0; i < file.getNregistos(); i++) 
+            {
                 modelo.read(file.stream);
 
                 if (modelo.getStatus()) {
@@ -118,17 +120,26 @@ public class DefesaFile extends ObjectsFile
 
             JTable tabela = new JTable(dados, colunas);
             tabela.setFillsViewportHeight(true);
-            tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-            JScrollPane scroll = new JScrollPane(tabela);
+            // ESSENCIAL: desativa redimensionamento automático para permitir scroll horizontal
+            tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+            // Você pode definir larguras mínimas para cada coluna se quiser
+            for (int i = 0; i < colunas.length; i++) {
+                tabela.getColumnModel().getColumn(i).setPreferredWidth(150);
+            }
+
+            JScrollPane scroll = new JScrollPane(tabela,
+                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                    JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
             JDialog dialogo = new JDialog();
             dialogo.setTitle("Gestao de Consultorio Medico - Lista de Defesas");
             dialogo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialogo.setLayout(new BorderLayout());
             dialogo.add(scroll, BorderLayout.CENTER);
-            dialogo.setSize(800, 600); // ou usar setExtendedState para tela cheia
-            dialogo.setLocationRelativeTo(null); // centraliza
+            dialogo.setSize(1000, 500); 
+            dialogo.setLocationRelativeTo(null);
             dialogo.setVisible(true);
 
         } catch (Exception ex) {

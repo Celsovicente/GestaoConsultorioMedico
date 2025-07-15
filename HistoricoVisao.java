@@ -170,36 +170,55 @@ public class HistoricoVisao extends JFrame
             txtData.getDTestField().setText(data);
         }
 
+        // metodo para validar os campos
+        public boolean validarDados()
+        {
+            if (getDiagnostico().isEmpty() || getTratamento().isEmpty() || getMedicoResponsavel().isEmpty() 
+            || getDataRegistro().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", 
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            return true;
+        } 
+
         // metodo salvar
         public void salvar()
         {
-            HistoricoModelo modelo = new HistoricoModelo(
-            getId(),
-            getDiagnostico(),
-            getTratamento(),
-            getMedicoResponsavel(),
-            getDataRegistro(),
-            true);
+            if(validarDados())
+            {
+                HistoricoModelo modelo = new HistoricoModelo(
+                getId(),
+                getDiagnostico(),
+                getTratamento(),
+                getMedicoResponsavel(),
+                getDataRegistro(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvar();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvar();
+                dispose();
+            }    
         }
 
         // metodo alterar
         public void alterar()
         {
-            HistoricoModelo modelo = new HistoricoModelo(
-            getId(),
-            getDiagnostico(),
-            getTratamento(),
-            getMedicoResponsavel(),
-            getDataRegistro(),
-            true);
+            if(validarDados())
+            {
+                HistoricoModelo modelo = new HistoricoModelo(
+                getId(),
+                getDiagnostico(),
+                getTratamento(),
+                getMedicoResponsavel(),
+                getDataRegistro(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvarDados();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvarDados();
+                dispose();
+            }
         }
     }
 

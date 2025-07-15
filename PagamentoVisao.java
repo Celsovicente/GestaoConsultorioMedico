@@ -168,37 +168,62 @@ public class PagamentoVisao extends JFrame
         {
            metodoPagamentoJCB.setSelectedItem(metodoPagamento);
         }
+
+        // método para validar os campos
+        public boolean validarDados() 
+        {
+            if (getDescricao().isEmpty() || getDataPagamento().isEmpty() || getMetodoPagamento().isEmpty()) 
+            {
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            if (getValor() <= 0) 
+            {
+                JOptionPane.showMessageDialog(null, "O valor deve ser maior que zero.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        }
         
         // metodo salvar
         public void salvar()
         {
-            PagamentoModelo modelo = new PagamentoModelo(
-            getId(),
-            getDescricao(),
-            getValor(),
-            getDataPagamento(),
-            getMetodoPagamento(),
-            true);
+            if(validarDados())
+            {
+                PagamentoModelo modelo = new PagamentoModelo(
+                getId(),
+                getDescricao(),
+                getValor(),
+                getDataPagamento(),
+                getMetodoPagamento(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvar();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvar();
+                dispose();
+            }
         }
 
         // alterar
         public void alterar()
         {
-            PagamentoModelo modelo = new PagamentoModelo(
-            getId(),
-            getDescricao(),
-            getValor(),
-            getDataPagamento(),
-            getMetodoPagamento(),
-            true);
+            if(validarDados())
+            {
+                PagamentoModelo modelo = new PagamentoModelo(
+                getId(),
+                getDescricao(),
+                getValor(),
+                getDataPagamento(),
+                getMetodoPagamento(),
+                true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
-            modelo.salvarDados();
-            dispose();
+                JOptionPane.showMessageDialog(null, modelo.toString());
+                modelo.salvarDados();
+                dispose();
+            }
         }
     }
 

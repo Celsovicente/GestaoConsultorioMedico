@@ -191,41 +191,59 @@ public class ConsultaVisao extends JFrame
         {
             observacoesJTA.setText(observacoes);
         }
+        
+        // metodo para validar os campos
+        public boolean validarDados()
+        {
+            if (getMedico().isEmpty() || getEspecialidade().isEmpty() || getDataConsulta().isEmpty() ||
+                getHoraConsulta().isEmpty() || getObservacoes().isEmpty()) 
+                {
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            return true;
+        } 
 
         // metodo salvar
         public void salvar()
         {
-            ConsultaModelo modelo = new ConsultaModelo(
-                getId(),
-                getMedico(),
-                getEspecialidade(),
-                getDataConsulta(), 
-                getHoraConsulta(),
-                getObservacoes(),
-                true);
+            if(validarDados())
+            {
+                ConsultaModelo modelo = new ConsultaModelo(
+                    getId(),
+                    getMedico(),
+                    getEspecialidade(),
+                    getDataConsulta(), 
+                    getHoraConsulta(),
+                    getObservacoes(),
+                    true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
+                JOptionPane.showMessageDialog(null, modelo.toString());
 
-            modelo.salvar();
-            dispose();
+                modelo.salvar();
+                dispose();
+            }        
         }
 
         // metodo alterar
         public void alterar()
         {
-            ConsultaModelo modelo = new ConsultaModelo(
-                getId(),
-                getMedico(),
-                getEspecialidade(),
-                getDataConsulta(), 
-                getHoraConsulta(),
-                getObservacoes(),
-                true);
+            if(validarDados())
+            {
+                ConsultaModelo modelo = new ConsultaModelo(
+                    getId(),
+                    getMedico(),
+                    getEspecialidade(),
+                    getDataConsulta(), 
+                    getHoraConsulta(),
+                    getObservacoes(),
+                    true);
 
-            JOptionPane.showMessageDialog(null, modelo.toString());
+                JOptionPane.showMessageDialog(null, modelo.toString());
 
-            modelo.salvarDados();
-            dispose();
+                modelo.salvarDados();
+                dispose();
+            }        
         }
     }
 
