@@ -24,9 +24,15 @@ public class ApresentacaoVisao extends JFrame
         super("Tela de Boas Vindas");
 
         JPanel painelNorte = new JPanel();
-        JLabel lbImagem = new JLabel(new ImageIcon("image/images.jpg"));
+        ImageIcon iconOriginal = new ImageIcon("image/principal.png");
+        Image imagemRedimensionada = iconOriginal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        ImageIcon iconRedimensionado = new ImageIcon(imagemRedimensionada);
+
+        JLabel lbImagem = new JLabel(iconRedimensionado);
+
         painelNorte.add(lbImagem);
-        getContentPane().add(painelNorte , BorderLayout.NORTH);
+        getContentPane().add(painelNorte, BorderLayout.NORTH);
+
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
         
@@ -48,7 +54,7 @@ public class ApresentacaoVisao extends JFrame
                 areaPrincipal.setText("Bem Vindo ao Sistema de Gestao do Consultorio Medico.\n" +
                 "\tTema: Gestao de Consultorio Medico\n" +
                 "Este projecto tem o objectivo de gerir informacoes  relacionadas ao atendimento clinico de pacientes\n" +
-                "permitindo o cadastro de pacientes, marcacao de consultas, controle de pagamentos e o historico do paciente." +
+                "permitindo o cadastro de pacientes, marcacao de consultas, controle de pagamentos e o historico do paciente.\n" +
                 "Este projeto foi desenvolvido no ambito da cadeira de Fundamentos de Programacao 2,\n" +
                 "no Curso de Engenharia Informatica na UCAN. E de uso exclusivo aos Recursos Humanos.\n" +
                 "Este projeto foi desenvolvido para Facilitar o Controlo e Gestao da inofrmacao sobre os pacientes do consultorio\n" +
