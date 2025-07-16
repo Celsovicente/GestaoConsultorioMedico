@@ -19,7 +19,7 @@ public class EliminarPacientes extends JFrame
     
     public EliminarPacientes()
     {
-        super("Pesquisas");
+        super("Pesquisas Para Eliminacao");
 
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
@@ -31,8 +31,8 @@ public class EliminarPacientes extends JFrame
 
     class PainelCentro extends JPanel implements ActionListener
     {
-        private JComboBox nomesJCB;
-        private JTextField numeroDocumentoJTF, idJTF, generoJTF, telefoneJTF, nacionalidadeJTF;
+        private JComboBox nomesJCB , numeroDocumentoJCB, generoJCB, telefoneJCB, nacionalidadeJCB;
+        private JTextField idJTF;
         private JRadioButton pesquisarPorNome, pesquisarPorDocumento, pesquisarPorId, 
         pesquisarPorTelefone, pesquisarPorGenero, pesquisarPorNacionalidade;
         private ButtonGroup grupo;
@@ -62,24 +62,24 @@ public class EliminarPacientes extends JFrame
             nomesJCB.setEnabled(false);
 
             add(new JLabel("Digite o numero do Documento Procurado"));
-            add(numeroDocumentoJTF = new JTextField());
-            numeroDocumentoJTF.setEnabled(false);
+            add(numeroDocumentoJCB = new JComboBox(PacienteFile.getAllNumeroDocumento()));
+            numeroDocumentoJCB.setEnabled(false);
 
             add(new JLabel("Digite o Id Procurado"));
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
 
             add(new JLabel("Escolha o Telefone Procurado"));
-            add(telefoneJTF = new JTextField());
-            telefoneJTF.setEnabled(false);
+            add(telefoneJCB = new JComboBox(PacienteFile.getAllTelefone()));
+            telefoneJCB.setEnabled(false);
 
             add(new JLabel("Digite o Genero Procurado"));
-            add(generoJTF = new JTextField());
-            generoJTF.setEnabled(false);
+            add(generoJCB = new JComboBox(PacienteFile.getAllGenero()));
+            generoJCB.setEnabled(false);
 
             add(new JLabel("Digite a Nacionalidade Procurada"));
-            add(nacionalidadeJTF = new JTextField());
-            nacionalidadeJTF.setEnabled(false);
+            add(nacionalidadeJCB = new JComboBox(PacienteFile.getAllNacionalidade()));
+            nacionalidadeJCB.setEnabled(false);
             
             pesquisarPorNome.addActionListener(this);
             pesquisarPorDocumento.addActionListener(this);
@@ -96,7 +96,7 @@ public class EliminarPacientes extends JFrame
 
         public String getNumeroDocumentoProcurado()
         {
-            return numeroDocumentoJTF.getText().trim();
+            return String.valueOf(numeroDocumentoJCB.getSelectedItem());
         }
 
         public int getIdProcurado() 
@@ -106,17 +106,17 @@ public class EliminarPacientes extends JFrame
 
         public String getTelefoneProcurado()
         {
-            return telefoneJTF.getText().trim();
+            return String.valueOf(telefoneJCB.getSelectedItem());
         }
         
         public String getGeneroProcurado()
         {
-            return generoJTF.getText().trim();
+            return String.valueOf(generoJCB.getSelectedItem());
         }
 
         public String getNacionalidadeProcurada()
         {
-            return nacionalidadeJTF.getText().trim();
+            return String.valueOf(nacionalidadeJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -140,56 +140,56 @@ public class EliminarPacientes extends JFrame
             if(event.getSource() == pesquisarPorNome)
             {
                 nomesJCB.setEnabled(true);
-                numeroDocumentoJTF.setEnabled(false);
+                numeroDocumentoJCB.setEnabled(false);
                 idJTF.setEnabled(false);
-                telefoneJTF.setEnabled(false);
-                generoJTF.setEnabled(false);
-                nacionalidadeJTF.setEnabled(false);
+                telefoneJCB.setEnabled(false);
+                generoJCB.setEnabled(false);
+                nacionalidadeJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorDocumento)
             {
                 nomesJCB.setEnabled(false);
-                numeroDocumentoJTF.setEnabled(true);
+                numeroDocumentoJCB.setEnabled(true);
                 idJTF.setEnabled(false);
-                telefoneJTF.setEnabled(false);
-                generoJTF.setEnabled(false);
-                nacionalidadeJTF.setEnabled(false);
+                telefoneJCB.setEnabled(false);
+                generoJCB.setEnabled(false);
+                nacionalidadeJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorId)
             {
                 nomesJCB.setEnabled(false);
-                numeroDocumentoJTF.setEnabled(false);
+                numeroDocumentoJCB.setEnabled(false);
                 idJTF.setEnabled(true);
-                telefoneJTF.setEnabled(false);
-                generoJTF.setEnabled(false);
-                nacionalidadeJTF.setEnabled(false);
+                telefoneJCB.setEnabled(false);
+                generoJCB.setEnabled(false);
+                nacionalidadeJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorTelefone)
             {
                 nomesJCB.setEnabled(false);
-                numeroDocumentoJTF.setEnabled(false);
+                numeroDocumentoJCB.setEnabled(false);
                 idJTF.setEnabled(false);
-                telefoneJTF.setEnabled(true);
-                generoJTF.setEnabled(false);
-                nacionalidadeJTF.setEnabled(false);
+                telefoneJCB.setEnabled(true);
+                generoJCB.setEnabled(false);
+                nacionalidadeJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorGenero)
             {
                 nomesJCB.setEnabled(false);
-                numeroDocumentoJTF.setEnabled(false);
+                numeroDocumentoJCB.setEnabled(false);
                 idJTF.setEnabled(false);
-                telefoneJTF.setEnabled(false);
-                generoJTF.setEnabled(true);   
-                nacionalidadeJTF.setEnabled(false);
+                telefoneJCB.setEnabled(false);
+                generoJCB.setEnabled(true);   
+                nacionalidadeJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorNacionalidade)
             {
-                    nomesJCB.setEnabled(false);
-                numeroDocumentoJTF.setEnabled(false);
+                nomesJCB.setEnabled(false);
+                numeroDocumentoJCB.setEnabled(false);
                 idJTF.setEnabled(false);
-                telefoneJTF.setEnabled(false);
-                generoJTF.setEnabled(false);   
-                nacionalidadeJTF.setEnabled(true);    
+                telefoneJCB.setEnabled(false);
+                generoJCB.setEnabled(false);   
+                nacionalidadeJCB.setEnabled(true);    
             }
         }
     }

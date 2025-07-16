@@ -593,4 +593,112 @@ public class PacienteFile extends ObjectsFile
         }
         return modelo;
     }
+
+    public static StringVector getAllNumeroDocumento()
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getNumeroDocumento());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+    public static StringVector getAllTelefone()
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getTelefone());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+        public static StringVector getAllGenero()
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getGenero());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
+
+        public static StringVector getAllNacionalidade()
+    {
+        PacienteFile file = new PacienteFile();
+        PacienteModelo modelo = new PacienteModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getNacionalidade());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
 }

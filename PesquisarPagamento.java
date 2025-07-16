@@ -32,7 +32,8 @@ public class PesquisarPagamento extends JFrame
     class PainelCentro extends JPanel implements ActionListener
     {
 
-        private JTextField  idJTF, descricaoJTF;
+        private JTextField  idJTF; 
+        private JComboBox descricaoJCB;
         private JRadioButton pesquisarPorId, pesquisarPorDescricao;
         private ButtonGroup grupo;
     
@@ -52,9 +53,9 @@ public class PesquisarPagamento extends JFrame
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
             
-            add(new JLabel("Digite a Descricao Procurado"));
-            add(descricaoJTF = new JTextField());
-            descricaoJTF.setEnabled(false);
+            add(new JLabel("Escolha a Descricao Procurado"));
+            add(descricaoJCB = new JComboBox(PagamentoFile.getAllDescricao()));
+            descricaoJCB.setEnabled(false);
             
             pesquisarPorId.addActionListener(this);
             pesquisarPorDescricao.addActionListener(this);
@@ -67,7 +68,7 @@ public class PesquisarPagamento extends JFrame
 
         public String getDescricaoProcurada()
         {
-            return descricaoJTF.getText().trim();
+            return String.valueOf(descricaoJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -83,12 +84,12 @@ public class PesquisarPagamento extends JFrame
             if(event.getSource() == pesquisarPorId)
             {
                 idJTF.setEnabled(true);
-                descricaoJTF.setEnabled(false);
+                descricaoJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorDescricao)
             {
                 idJTF.setEnabled(false);
-                descricaoJTF.setEnabled(true);
+                descricaoJCB.setEnabled(true);
             }
         }
     }

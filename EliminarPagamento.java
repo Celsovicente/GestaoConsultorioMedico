@@ -19,7 +19,7 @@ public class EliminarPagamento extends JFrame
     
     public EliminarPagamento()
     {
-        super("Pesquisas do Pagamento");
+        super("Pesquisas do Pagamento Para Eliminacao");
 
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
@@ -29,10 +29,11 @@ public class EliminarPagamento extends JFrame
         setVisible(true);
     }
 
-    class PainelCentro extends JPanel implements ActionListener
+class PainelCentro extends JPanel implements ActionListener
     {
 
-        private JTextField  idJTF, descricaoJTF;
+        private JTextField  idJTF; 
+        private JComboBox descricaoJCB;
         private JRadioButton pesquisarPorId, pesquisarPorDescricao;
         private ButtonGroup grupo;
     
@@ -52,9 +53,9 @@ public class EliminarPagamento extends JFrame
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
             
-            add(new JLabel("Digite a Descricao Procurado"));
-            add(descricaoJTF = new JTextField());
-            descricaoJTF.setEnabled(false);
+            add(new JLabel("Escolha a Descricao Procurado"));
+            add(descricaoJCB = new JComboBox(PagamentoFile.getAllDescricao()));
+            descricaoJCB.setEnabled(false);
             
             pesquisarPorId.addActionListener(this);
             pesquisarPorDescricao.addActionListener(this);
@@ -67,7 +68,7 @@ public class EliminarPagamento extends JFrame
 
         public String getDescricaoProcurada()
         {
-            return descricaoJTF.getText().trim();
+            return String.valueOf(descricaoJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -83,12 +84,12 @@ public class EliminarPagamento extends JFrame
             if(event.getSource() == pesquisarPorId)
             {
                 idJTF.setEnabled(true);
-                descricaoJTF.setEnabled(false);
+                descricaoJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorDescricao)
             {
                 idJTF.setEnabled(false);
-                descricaoJTF.setEnabled(true);
+                descricaoJCB.setEnabled(true);
             }
         }
     }

@@ -32,7 +32,8 @@ public class PesquisarHistorico extends JFrame
     class PainelCentro extends JPanel implements ActionListener
     {
 
-        private JTextField  idJTF, diagnosticoJTF;
+        private JTextField  idJTF;
+        private JComboBox diagnosticoJCB;
         private JRadioButton pesquisarPorId, pesquisarPorDiagnostico;
         private ButtonGroup grupo;
     
@@ -52,9 +53,9 @@ public class PesquisarHistorico extends JFrame
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
             
-            add(new JLabel("Digite o Diagnostico Procurado"));
-            add(diagnosticoJTF = new JTextField());
-            diagnosticoJTF.setEnabled(false);
+            add(new JLabel("Escolha o Diagnostico Procurado"));
+            add(diagnosticoJCB = new JComboBox(HistoricoFile.getAllDiagnosticos()));
+            diagnosticoJCB.setEnabled(false);
             
             pesquisarPorId.addActionListener(this);
             pesquisarPorDiagnostico.addActionListener(this);
@@ -67,7 +68,7 @@ public class PesquisarHistorico extends JFrame
 
         public String getDiagnosticoProcurado()
         {
-            return diagnosticoJTF.getText().trim();
+            return String.valueOf(diagnosticoJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -83,12 +84,12 @@ public class PesquisarHistorico extends JFrame
             if(event.getSource() == pesquisarPorId)
             {
                 idJTF.setEnabled(true);
-                diagnosticoJTF.setEnabled(false);
+                diagnosticoJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorDiagnostico)
             {
                 idJTF.setEnabled(false);
-                diagnosticoJTF.setEnabled(true);
+                diagnosticoJCB.setEnabled(true);
             }
         }
     }

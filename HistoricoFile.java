@@ -289,4 +289,31 @@ public class HistoricoFile extends ObjectsFile
         }
         return modelo;
     }
+
+    public static StringVector getAllDiagnosticos()
+    {
+        HistoricoFile file = new HistoricoFile();
+        HistoricoModelo modelo = new HistoricoModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getDiagnostico());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
 }

@@ -19,7 +19,7 @@ public class EliminarConsulta extends JFrame
     
     public EliminarConsulta()
     {
-        super("Pesquisas da Consulta");
+        super("Pesquisas da Consulta Para Eliminacao");
 
         getContentPane().add(centro = new PainelCentro(), BorderLayout.CENTER);
         getContentPane().add(sul = new PainelSul(), BorderLayout.SOUTH);
@@ -31,14 +31,16 @@ public class EliminarConsulta extends JFrame
 
     class PainelCentro extends JPanel implements ActionListener
     {
-        private JTextField  idJTF, medicoJTF;
+        private JTextField  idJTF;
+        private JComboBox medicoJCB;
         private JRadioButton pesquisarPorId, pesquisarPorMedico;
+        private JComboBoxTabela2_Tabela3 especialidadeMedico;
         private ButtonGroup grupo;
     
         public PainelCentro()
         {
             setLayout(new GridLayout(3 , 2));
-            
+            especialidadeMedico = new JComboBoxTabela2_Tabela3("Especialidades.tab", "Medicos.tab");
             grupo = new ButtonGroup();
 
             add(pesquisarPorId = new JRadioButton("Pesquisa Por Id"));
@@ -51,9 +53,9 @@ public class EliminarConsulta extends JFrame
             add(idJTF = new JTextField());
             idJTF.setEnabled(false);
             
-            add(new JLabel("Digite o Medico Procurado"));
-            add(medicoJTF = new JTextField());
-            medicoJTF.setEnabled(false);
+            add(new JLabel("Escolha o Medico Procurado"));
+            add(medicoJCB = especialidadeMedico.getComboBoxSun());
+            medicoJCB.setEnabled(false);
             
             pesquisarPorId.addActionListener(this);
             pesquisarPorMedico.addActionListener(this);
@@ -66,7 +68,7 @@ public class EliminarConsulta extends JFrame
 
         public String getMedicoProcurado()
         {
-            return medicoJTF.getText().trim();
+            return String.valueOf(medicoJCB.getSelectedItem());
         }
 
         public int getTipoPesquisa()
@@ -82,12 +84,12 @@ public class EliminarConsulta extends JFrame
             if(event.getSource() == pesquisarPorId)
             {
                 idJTF.setEnabled(true);
-                medicoJTF.setEnabled(false);
+                medicoJCB.setEnabled(false);
             }
             else if(event.getSource() == pesquisarPorMedico)
             {
                 idJTF.setEnabled(false);
-                medicoJTF.setEnabled(true);
+                medicoJCB.setEnabled(true);
             }
         }
     }

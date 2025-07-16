@@ -303,4 +303,31 @@ public class PagamentoFile extends ObjectsFile
         }
         return modelo;
     }
+
+    public static StringVector getAllDescricao()
+    {
+        PagamentoFile file = new PagamentoFile();
+        PagamentoModelo modelo = new PagamentoModelo();
+        StringVector vetor = new StringVector();
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                if(modelo.getStatus() == true)
+                    vetor.add(modelo.getDescricao());
+            }
+            
+            vetor.sort();    
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return vetor;
+    }
 }

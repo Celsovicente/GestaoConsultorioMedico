@@ -47,7 +47,7 @@ public class ApresentacaoVisao extends JFrame
                 areaPrincipal.setFocusable(false);
                 areaPrincipal.setText("Bem Vindo ao Sistema de Gestao do Consultorio Medico.\n" +
                 "\tTema: Gestao de Consultorio Medico\n" +
-                "Este projecto tem o objectivo de geerir informacoes  relacionadas ao atendimento clinico de pacientes\n" +
+                "Este projecto tem o objectivo de gerir informacoes  relacionadas ao atendimento clinico de pacientes\n" +
                 "permitindo o cadastro de pacientes, marcacao de consultas, controle de pagamentos e o historico do paciente." +
                 "Este projeto foi desenvolvido no ambito da cadeira de Fundamentos de Programacao 2,\n" +
                 "no Curso de Engenharia Informatica na UCAN. E de uso exclusivo aos Recursos Humanos.\n" +
