@@ -147,6 +147,7 @@ public class ConsultaFile extends ObjectsFile
     {
         ConsultaFile file = new ConsultaFile();
         ConsultaModelo modelo = new ConsultaModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -161,17 +162,16 @@ public class ConsultaFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return 0;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
-                    return 0;      
-                }
+                
             }
-               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -184,6 +184,7 @@ public class ConsultaFile extends ObjectsFile
     {
         ConsultaFile file = new ConsultaFile();
         ConsultaModelo modelo = new ConsultaModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -198,14 +199,16 @@ public class ConsultaFile extends ObjectsFile
                 if(modelo.getMedico().equalsIgnoreCase(medicoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return;
                 }
-                else
-                {
+            }
+
+            if(!encontrado)
+            {
                     JOptionPane.showMessageDialog(null, "Erro, medico nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
                     return;
-                }
             }
         }
         catch(Exception ex)
@@ -219,6 +222,7 @@ public class ConsultaFile extends ObjectsFile
     {
         ConsultaFile file = new ConsultaFile();
         ConsultaModelo modelo = new ConsultaModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -233,11 +237,15 @@ public class ConsultaFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return modelo;
                 }
             }
+            if(!encontrado)
+            {
                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -251,6 +259,7 @@ public class ConsultaFile extends ObjectsFile
     {
         ConsultaFile file = new ConsultaFile();
         ConsultaModelo modelo = new ConsultaModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -265,13 +274,15 @@ public class ConsultaFile extends ObjectsFile
                 if(modelo.getMedico().equalsIgnoreCase(medicoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return modelo;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, medico nao encontrado", 
+            }
+
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, medico nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
-                }
             }
         }
         catch(Exception ex)

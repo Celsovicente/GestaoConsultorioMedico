@@ -233,6 +233,7 @@ public class DefesaFile extends ObjectsFile
         DefesaFile file = new DefesaFile();
         DefesaModelo modelo = new DefesaModelo();
 
+
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
         try
@@ -365,6 +366,7 @@ public class DefesaFile extends ObjectsFile
     {
         DefesaFile file = new DefesaFile();
         DefesaModelo modelo = new DefesaModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -383,14 +385,16 @@ public class DefesaFile extends ObjectsFile
                 modelo.getDataFundacao().equals(dataConvertida))
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
-                    return;
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, data de fundacao nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                    encontrado = true;
+                    break;
                 }
             }
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, paroquia e a data de fundacao nao encontradas", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
         catch(Exception ex)
         {

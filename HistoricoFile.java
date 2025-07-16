@@ -148,6 +148,7 @@ public class HistoricoFile extends ObjectsFile
     {
         HistoricoFile file = new HistoricoFile();
         HistoricoModelo modelo = new HistoricoModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -162,11 +163,16 @@ public class HistoricoFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return 0;
                 }
             }
-               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -179,6 +185,7 @@ public class HistoricoFile extends ObjectsFile
     {
         HistoricoFile file = new HistoricoFile();
         HistoricoModelo modelo = new HistoricoModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -193,13 +200,15 @@ public class HistoricoFile extends ObjectsFile
                 if(modelo.getDiagnostico().equalsIgnoreCase(diagnosticoProcurado) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
-                }
+            }
+
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
+                "File Not Found", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception ex)
@@ -213,6 +222,7 @@ public class HistoricoFile extends ObjectsFile
     {
         HistoricoFile file = new HistoricoFile();
         HistoricoModelo modelo = new HistoricoModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -227,11 +237,15 @@ public class HistoricoFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return modelo;
                 }
             }
-               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -245,6 +259,7 @@ public class HistoricoFile extends ObjectsFile
     {
         HistoricoFile file = new HistoricoFile();
         HistoricoModelo modelo = new HistoricoModelo();
+        boolean encontrado = false;
 
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
@@ -261,11 +276,11 @@ public class HistoricoFile extends ObjectsFile
                     JOptionPane.showMessageDialog(null, modelo.toString());
                     return modelo;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
-                }
+            }
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, diagnostico nao encontrado", 
+                "File Not Found", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception ex)

@@ -168,7 +168,7 @@ public class PagamentoFile extends ObjectsFile
     {
         PagamentoFile file = new PagamentoFile();
         PagamentoModelo modelo = new PagamentoModelo();
-
+        boolean encontrado = false;
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
         try
@@ -182,11 +182,15 @@ public class PagamentoFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return 0;
                 }
             }
-               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+            if(!encontrado)
+            { 
+                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+                "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -199,7 +203,7 @@ public class PagamentoFile extends ObjectsFile
     {
         PagamentoFile file = new PagamentoFile();
         PagamentoModelo modelo = new PagamentoModelo();
-
+        boolean encontrado = false;
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
         try
@@ -213,13 +217,15 @@ public class PagamentoFile extends ObjectsFile
                 if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, descricao nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
-                }
+            }
+
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, descricao nao encontrado", 
+                "File Not Found", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception ex)
@@ -232,7 +238,7 @@ public class PagamentoFile extends ObjectsFile
     {
         PagamentoFile file = new PagamentoFile();
         PagamentoModelo modelo = new PagamentoModelo();
-
+        boolean encontrado = false;
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
         try
@@ -246,11 +252,15 @@ public class PagamentoFile extends ObjectsFile
                 if(modelo.getId() == idProcurado && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return modelo;
                 }
             }
-               JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, id nao encontrado", 
                     "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(Exception ex)
         {
@@ -263,7 +273,7 @@ public class PagamentoFile extends ObjectsFile
     {
         PagamentoFile file = new PagamentoFile();
         PagamentoModelo modelo = new PagamentoModelo();
-
+        boolean encontrado = false;
         String dados = "Listagem de Dados do Ficheiro \n\n";
 
         try
@@ -277,13 +287,14 @@ public class PagamentoFile extends ObjectsFile
                 if(modelo.getDescricao().equalsIgnoreCase(descricaoProcurada) && modelo.getStatus() == true)
                 {
                     JOptionPane.showMessageDialog(null, modelo.toString());
+                    encontrado = true;
                     return modelo;
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Erro, descricao nao encontrado", 
-                    "File Not Found", JOptionPane.ERROR_MESSAGE);
-                }
+            }
+            if(!encontrado)
+            {
+                JOptionPane.showMessageDialog(null, "Erro, descricao nao encontrado", 
+                "File Not Found", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception ex)
