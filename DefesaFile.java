@@ -360,4 +360,41 @@ public class DefesaFile extends ObjectsFile
         }
     }
 
+    // pesquisa por filtro
+    public static void pesquisaPorFiltro(String paroquia, String dataFundacao)
+    {
+        DefesaFile file = new DefesaFile();
+        DefesaModelo modelo = new DefesaModelo();
+
+        String dados = "Listagem de Dados do Ficheiro \n\n";
+
+        try
+        {
+            file.stream.seek(4);
+
+            for(int i = 0; i < file.getNregistos(); i++)
+            {
+                modelo.read(file.stream);
+
+                // conversao da data
+                String dataConvertida = new DataModelo(dataFundacao).toString();
+                
+                if(modelo.getStatus() && modelo.getParoquia().equalsIgnoreCase(paroquia) &&  
+                modelo.getDataFundacao().equals(dataConvertida))
+                {
+                    JOptionPane.showMessageDialog(null, modelo.toString());
+                    return;
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Erro, data de fundacao nao encontrado", 
+                    "File Not Found", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

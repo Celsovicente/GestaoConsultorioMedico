@@ -29,49 +29,32 @@ public class PesquisarDefesa extends JFrame
         setVisible(true);
     }
 
-    class PainelCentro extends JPanel implements ActionListener
+    class PainelCentro extends JPanel
     {
-        private JTextField dataFundacaoJTF;
+        private JTextFieldData dataFundacaoJTF;
         private JComboBox conferenciaJCB, dioceseJCB, paroquiaJCB;
         private JRadioButton pesquisarConferencia, pesquisarDiocese, pesquisarParoquia, pesquisarData;
         private ButtonGroup grupo;
-    
+
         public PainelCentro()
         {
-            setLayout(new GridLayout(8 , 2));
-            
-            grupo = new ButtonGroup();
-
-            add(pesquisarConferencia = new JRadioButton("Pesquisa Por Conferencia"));
-            add(pesquisarDiocese = new JRadioButton("Pesquisa Por Diocese"));
-            add(pesquisarParoquia = new JRadioButton("Pesquisar Por Paroquia"));
-            add(pesquisarData = new JRadioButton("Pesquisar Por Data de Fundacao"));
-
-            grupo.add(pesquisarConferencia);
-            grupo.add(pesquisarDiocese);
-            grupo.add(pesquisarParoquia);
-            grupo.add(pesquisarData);
+            setLayout(new GridLayout(4 , 2));
             
             add(new JLabel("Escolha a Conferencia Procurada"));
             add(conferenciaJCB = new JComboBox(DefesaFile.getAllConferencias()));
-            conferenciaJCB.setEnabled(false);
             
             add(new JLabel("Escolha a Diocese Procurada"));
             add(dioceseJCB = new JComboBox(DefesaFile.getAllDioceses()));
-            dioceseJCB.setEnabled(false);
 
             add(new JLabel("Escolha Paroquia Procurada"));
             add(paroquiaJCB = new JComboBox(DefesaFile.getAllParoquias()));
-            paroquiaJCB.setEnabled(false);
 
-            add(new JLabel("Digite a Data Procurada"));
-            add(dataFundacaoJTF = new JTextField());
-            dataFundacaoJTF.setEnabled(false);
-            
-            pesquisarConferencia.addActionListener(this);
-            pesquisarDiocese.addActionListener(this);
-            pesquisarParoquia.addActionListener(this);
-            pesquisarData.addActionListener(this);
+            add(new JLabel("Data de Fundacao:"));
+            dataFundacaoJTF = new JTextFieldData("Data?");
+            JPanel painelData = new JPanel(new GridLayout(1, 2));
+            painelData.add(dataFundacaoJTF.getDTestField());
+            painelData.add(dataFundacaoJTF.getDButton());
+            add(painelData);
         }
 
         public String getConferenciaProcurada() 
@@ -91,51 +74,7 @@ public class PesquisarDefesa extends JFrame
 
         public String getDataProcurada()
         {
-            return dataFundacaoJTF.getText().trim();
-        }
-
-        public int getTipoPesquisa()
-        {
-            if(pesquisarConferencia.isSelected())
-                return 1;
-            else if(pesquisarDiocese.isSelected())
-                return 2;
-            else if(pesquisarParoquia.isSelected())
-                return 3;
-            else
-                return 4;
-        }
-
-        public void actionPerformed(ActionEvent event)
-        {
-            if(event.getSource() == pesquisarConferencia)
-            {
-                conferenciaJCB.setEnabled(true);
-                dioceseJCB.setEnabled(false);
-                paroquiaJCB.setEnabled(false);
-                dataFundacaoJTF.setEnabled(false);
-            }
-            else if(event.getSource() == pesquisarDiocese)
-            {
-                conferenciaJCB.setEnabled(false);
-                dioceseJCB.setEnabled(true);
-                paroquiaJCB.setEnabled(false);
-                dataFundacaoJTF.setEnabled(false);
-            }
-            else if(event.getSource() == pesquisarParoquia)
-            {
-                conferenciaJCB.setEnabled(false);
-                dioceseJCB.setEnabled(false);
-                paroquiaJCB.setEnabled(true);
-                dataFundacaoJTF.setEnabled(false);
-            }
-            else if(event.getSource() == pesquisarData)
-            {
-                conferenciaJCB.setEnabled(false);
-                dioceseJCB.setEnabled(false);
-                paroquiaJCB.setEnabled(false);
-                dataFundacaoJTF.setEnabled(true);
-            }
+            return dataFundacaoJTF.toString();
         }
     }
 
@@ -156,14 +95,9 @@ public class PesquisarDefesa extends JFrame
         {
             if(event.getSource() == pesquisarJB)
             {    
-                if(centro.getTipoPesquisa() == 1)
-                    DefesaFile.pesquisarPorConferencia(centro.getConferenciaProcurada());
-                else if(centro.getTipoPesquisa() == 2)
-                    DefesaFile.pesquisarPorDiocese(centro.getDioceseProcurada());
-                else if(centro.getTipoPesquisa() == 3)
-                    DefesaFile.pesquisarPorParoquia(centro.getParoquiaProcurada());
-                else if(centro.getTipoPesquisa() == 4)
-                    DefesaFile.pesquisarPorDataFundacao(centro.getDataProcurada());
+                String paroquia = centro.getParoquiaProcurada();
+                String dataFundacao = centro.dataFundacaoJTF.getDTestField().getText();
+                DefesaFile.pesquisaPorFiltro(paroquia, dataFundacao);
             }
             else 
                 dispose();
